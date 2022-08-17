@@ -8,7 +8,7 @@ const autos_url = "https://japceibal.github.io/emercado-api/cats_products/101.js
             result.data = await response.json();
             result.status = "ok";
         } else {
-            throw Error(response.statusText);
+            throw Error(response.statusText);    
         }
     } 
     catch (error) {
@@ -43,8 +43,8 @@ function addProduct(jsonData) {
     container.innerHTML = content_to_append;
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    jsonData(autos_url).then(function(productData) {
+document.addEventListener("DOMContentLoaded", async function() {
+    let productData = await jsonData(autos_url);
         if (productData.status === "ok") {
             productInfo = productData.data ;
             addProduct(productInfo);
@@ -52,5 +52,5 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     
     
-})
+
 

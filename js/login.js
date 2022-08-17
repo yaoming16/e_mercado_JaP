@@ -6,13 +6,13 @@ const form = document.getElementsByClassName("form");
 
  submit.addEventListener("click", function() {
 
-     if (email.value.length !== 0  && password.value.length !== 0) {
+     if (email.value.trim() !== ""  && password.value.trim() !== "") {
 
         form.onsubmit = "return true";
         window.location.href = "portada.html" ;
 
      } 
-     if (email.value.length === 0) {
+     if (email.value.trim() === "") {
         email.classList = "alert-input";
         alert_p[0].innerHTML = "Ingresa tu e-mail "
         
@@ -21,7 +21,7 @@ const form = document.getElementsByClassName("form");
       alert_p[0].innerHTML = ""
    }
      
-     if (password.value.length === 0) {
+     if (password.value.trim() === "") {
         password.classList = "alert-input";
         alert_p[1].innerHTML = "Ingresa tu constraseña "
         
@@ -32,3 +32,18 @@ const form = document.getElementsByClassName("form");
 
  })
 
+
+ function onSignIn(googleUser) {
+   var profile = googleUser.getBasicProfile();
+   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+   console.log('Name: ' + profile.getName());
+   console.log('Image URL: ' + profile.getImageUrl());
+   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+ }
+
+ function signOut() {
+   var auth2 = gapi.auth2.getAuthInstance();
+   auth2.signOut().then(function () {
+     console.log('User signed out.');
+   });
+ }
