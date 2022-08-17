@@ -12,7 +12,8 @@
 
   <link href="css/login.css" rel="stylesheet">
 
-  <meta name="google-signin-client_id" content="86756801876-alsvcgn023eunbf6nunhu2aqgrhvm73b.apps.googleusercontent.com">
+  <!-- <meta name="google-signin-client_id" content="86756801876-alsvcgn023eunbf6nunhu2aqgrhvm73b.apps.googleusercontent.com"> -->
+
 
 </head>
 
@@ -39,7 +40,23 @@
         <input type="password" id="password" name="password" placeholder="Contraseña" >
         <p class="alert-p"></p>
 
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+
+        
+        <div id="g_id_onload"
+          data-client_id="86756801876-alsvcgn023eunbf6nunhu2aqgrhvm73b.apps.googleusercontent.com"
+          data-login_uri=""
+          data-auto_prompt="false">
+        </div>
+        <div class="g_id_signin"
+          data-type="standard"
+          data-size="large"
+          data-theme="outline"
+          data-text="sign_in_with"
+          data-shape="rectangular"
+          data-logo_alignment="left">
+        </div>
+
         <button type="submit" id="submit" >Ingresar</button>
         
   
@@ -60,7 +77,10 @@
   </footer>
 
   <script src="js/login.js"></script>
+
   <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 
 </body>
 
