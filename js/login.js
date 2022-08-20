@@ -60,6 +60,8 @@ function handleCredentialResponse(response) {
 
 }
 
+//  inicializa el cliente de Acceder con Google //
+
 window.onload = function () {
    google.accounts.id.initialize({
          // replace your client id below
