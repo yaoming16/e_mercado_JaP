@@ -67,7 +67,6 @@ window.onload = function () {
          callback: handleCredentialResponse,
          auto_select: true,
          auto: true,
-         data_onsuccess: redirect()
 
    });
 
