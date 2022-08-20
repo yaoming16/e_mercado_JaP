@@ -34,7 +34,7 @@ const form = document.getElementsByClassName("form");
 
 
 function redirect() {
-   alert("asd");
+   window.location.href = "portada.html";
 }
 
 
@@ -72,7 +72,7 @@ window.onload = function () {
 
    google.accounts.id.renderButton(
          document.getElementById("google-button"),
-         { theme: "filled_blue", size: "medium", width: '200' }  // customization attributes
+         { theme: "filled_blue", size: "medium", width: '200', onsuccess: "onSuccess", onfailure: "onFailure" }  // customization attributes
    );
    // also display the One Tap dialog on right side
    // important for auto login
@@ -81,6 +81,7 @@ window.onload = function () {
 
 
 // function to decode the response.credential
+
 function decodeJwtResponse(token) {
    var base64Url = token.split('.')[1];
    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
