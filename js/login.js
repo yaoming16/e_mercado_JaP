@@ -73,7 +73,7 @@ window.onload = function () {
    google.accounts.id.initialize({
        // replace your client id below
        client_id: "86756801876-v67f8v560bqp6jtnqj32la891db4llq3.apps.googleusercontent.com",
-       callback: handleCredentialResponse,
+       callback: redirect,
        auto_select: true,
        auto: true
    });
