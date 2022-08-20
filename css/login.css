@@ -42,7 +42,7 @@ form input {
 }
 
 #submit {
-    margin: 2rem 0;
+    margin: 1rem 0;
     width: 25%;
     min-width: 5rem;
     height: 3rem;
@@ -62,8 +62,8 @@ form input {
 }
 
 #google-button {
-    width: 50%;
-    margin: 1rem 0;
+    margin: 1rem 0 0 0;
+    max-width: 50%;
 }
 
 
