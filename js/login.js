@@ -72,7 +72,7 @@ window.onload = function () {
 
    google.accounts.id.renderButton(
          document.getElementById("google-button"),
-         { theme: "filled_blue", size: "medium", width: '200'}  // customization attributes
+         { theme: "filled_blue", size: "medium"}  // customization attributes
    );
    // also display the One Tap dialog on right side
    // important for auto login
