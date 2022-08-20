@@ -100,10 +100,6 @@ function decodeJwtResponse(token) {
    return JSON.parse(jsonPayload);
 }
 
-function signOut() {
-   google.accounts.id.disableAutoSelect();
-   // do anything on logout
-   location.reload();
-}
+
 
 
