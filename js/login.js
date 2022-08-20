@@ -49,6 +49,7 @@ var googleButton = document.getElementById('google-button');
 // function to get response
 function handleCredentialResponse(response) {
    const responsePayload = decodeJwtResponse(response.credential);
+   redirect();
 
    // img.src = responsePayload.picture;
    // getName.innerHTML = responsePayload.name;
@@ -78,6 +79,7 @@ window.onload = function () {
    // important for auto login
    google.accounts.id.prompt(); 
 }
+
 
 // function to decode the response.credential
 function decodeJwtResponse(token) {
