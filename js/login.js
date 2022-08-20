@@ -49,7 +49,7 @@ var googleButton = document.getElementById('google-button');
 // function to get response
 function handleCredentialResponse(response) {
    const responsePayload = decodeJwtResponse(response.credential);
-   redirect();
+   
 
    // img.src = responsePayload.picture;
    // getName.innerHTML = responsePayload.name;
@@ -72,7 +72,7 @@ window.onload = function () {
 
    google.accounts.id.renderButton(
          document.getElementById("google-button"),
-         { theme: "filled_blue", size: "medium"}  // customization attributes
+         { theme: "filled_blue", size: "medium", onsuccess: "redirect"}  // customization attributes
    );
    // also display the One Tap dialog on right side
    // important for auto login
