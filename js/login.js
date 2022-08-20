@@ -52,15 +52,53 @@ function redirect() {
 //    });
 //  }
 
-function handleCredentialResponse(response) {
-   // decodeJwtResponse() is a custom function defined by you
-   // to decode the credential response.
-   const responsePayload = decodeJwtResponse(response.credential);
+// function handleCredentialResponse(response) {
+//    // decodeJwtResponse() is a custom function defined by you
+//    // to decode the credential response.
+//    const responsePayload = decodeJwtResponse(response.credential);
 
-   console.log("ID: " + responsePayload.sub);
-   console.log('Full Name: ' + responsePayload.name);
-   console.log('Given Name: ' + responsePayload.given_name);
-   console.log('Family Name: ' + responsePayload.family_name);
-   console.log("Image URL: " + responsePayload.picture);
-   console.log("Email: " + responsePayload.email);
+//    console.log("ID: " + responsePayload.sub);
+//    console.log('Full Name: ' + responsePayload.name);
+//    console.log('Given Name: ' + responsePayload.given_name);
+//    console.log('Family Name: ' + responsePayload.family_name);
+//    console.log("Image URL: " + responsePayload.picture);
+//    console.log("Email: " + responsePayload.email);
+// }
+
+var googleButton = document.getElementById('google-button');
+
+function handleCredentialResponse(response) {
+   const responsePayload = decodeJwtResponse(response.credential);
+   // img.src = responsePayload.picture;
+   // getName.innerHTML = responsePayload.name;
+   // id.innerHTML = responsePayload.sub;
+   // email.innerHTML = responsePayload.email;
+   // container.style.display = 'inline-block';
+   // googleButton.style.display = 'none'
+}
+
+window.onload = function () {
+   google.accounts.id.initialize({
+       // replace your client id below
+       client_id: "86756801876-v67f8v560bqp6jtnqj32la891db4llq3.apps.googleusercontent.com",
+       callback: handleCredentialResponse,
+       auto_select: true,
+       auto: true
+   });
+   google.accounts.id.renderButton(
+       document.getElementById("google-button"),
+       { theme: "filled_blue", size: "medium", width: '200' }  // customization attributes
+   );
+   // also display the One Tap dialog on right side
+   // important for auto login
+   google.accounts.id.prompt(); 
+}
+
+function decodeJwtResponse(token) {
+   var base64Url = token.split('.')[1];
+   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+   var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+       return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+   }).join(''));
+   return JSON.parse(jsonPayload);
 }
