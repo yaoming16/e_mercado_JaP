@@ -69,21 +69,19 @@ var googleButton = document.getElementById('google-button');
 
 
 
-window.onload = function () {
+function handleCredentialResponse(response) {
+   console.log("Encoded JWT ID token: " + response.credential);
+ }
+ window.onload = function () {
    google.accounts.id.initialize({
-       // replace your client id below
-       client_id: "86756801876-v67f8v560bqp6jtnqj32la891db4llq3.apps.googleusercontent.com",
-       callback: redirect,
-       auto_select: true,
-       auto: true
+     client_id: "86756801876-v67f8v560bqp6jtnqj32la891db4llq3.apps.googleusercontent.com",
+     callback: handleCredentialResponse
    });
    google.accounts.id.renderButton(
-       document.getElementById("google-button"),
-       { theme: "filled_blue", size: "medium", width: '200' }  // customization attributes
+     document.getElementById("buttonDiv"),
+     { theme: "outline", size: "large" }  // customization attributes
    );
-   // also display the One Tap dialog on right side
-   // important for auto login
-   google.accounts.id.prompt(); 
-}
+   google.accounts.id.prompt(); // also display the One Tap dialog
+ }
 
 
