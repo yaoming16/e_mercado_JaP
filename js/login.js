@@ -38,39 +38,25 @@ function redirect() {
 }
 
 
-
-
-// function handleCredentialResponse(response) {
-//    console.log("Encoded JWT ID token: " + response.credential);
-//  }
-//  window.onload = function () {
-//    google.accounts.id.initialize({
-//      client_id: "86756801876-v67f8v560bqp6jtnqj32la891db4llq3.apps.googleusercontent.com",
-//      callback: handleCredentialResponse
-//    });
-//    google.accounts.id.renderButton(
-//      document.getElementById("buttonDiv"),
-//      { theme: "outline", size: "large" }  // customization attributes
-//    );
-//    google.accounts.id.prompt(); // also display the One Tap dialog
-//  }
-
 var googleButton = document.getElementById('google-button');
-var container = document.getElementsByClassName('container')[0];
-var img = document.getElementsByClassName('img')[0];
-var getName = document.getElementsByClassName('name')[0];
-var id = document.getElementsByClassName('id')[0];
-var email2 = document.getElementsByClassName('email')[0];
+
+// var container = document.getElementsByClassName('container')[0];
+// var img = document.getElementsByClassName('img')[0];
+// var getName = document.getElementsByClassName('name')[0];
+// var id = document.getElementsByClassName('id')[0];
+// var email2 = document.getElementsByClassName('email')[0];
 
 // function to get response
 function handleCredentialResponse(response) {
    const responsePayload = decodeJwtResponse(response.credential);
-   img.src = responsePayload.picture;
-   getName.innerHTML = responsePayload.name;
-   id.innerHTML = responsePayload.sub;
-   email.innerHTML = responsePayload.email2;
-   container.style.display = 'inline-block';
-   googleButton.style.display = 'none'
+
+   // img.src = responsePayload.picture;
+   // getName.innerHTML = responsePayload.name;
+   // id.innerHTML = responsePayload.sub;
+   // email.innerHTML = responsePayload.email2;
+   // container.style.display = 'inline-block';
+   // googleButton.style.display = 'none'
+
 }
 
 window.onload = function () {
@@ -79,8 +65,11 @@ window.onload = function () {
          client_id: "86756801876-v67f8v560bqp6jtnqj32la891db4llq3.apps.googleusercontent.com",
          callback: handleCredentialResponse,
          auto_select: true,
-         auto: true
+         auto: true,
+         data_onsuccess: redirect()
+
    });
+
    google.accounts.id.renderButton(
          document.getElementById("google-button"),
          { theme: "filled_blue", size: "medium", width: '200' }  // customization attributes
