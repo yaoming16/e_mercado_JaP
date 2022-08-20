@@ -76,7 +76,7 @@ function handleCredentialResponse(response) {
 window.onload = function () {
    google.accounts.id.initialize({
          // replace your client id below
-         client_id: "742014186560-mg14hm935ung3sjh51pgmcr97qkrtn37.apps.googleusercontent.com",
+         client_id: "86756801876-v67f8v560bqp6jtnqj32la891db4llq3.apps.googleusercontent.com",
          callback: handleCredentialResponse,
          auto_select: true,
          auto: true
