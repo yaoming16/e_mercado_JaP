@@ -37,51 +37,73 @@ function redirect() {
    alert("asd");
 }
 
-//  function onSignIn(googleUser) {
-//    var profile = googleUser.getBasicProfile();
-//    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-//    console.log('Name: ' + profile.getName());
-//    console.log('Image URL: ' + profile.getImageUrl());
-//    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-//  }
 
-//  function signOut() {
-//    var auth2 = gapi.auth2.getAuthInstance();
-//    auth2.signOut().then(function () {
-//      console.log('User signed out.');
-//    });
-//  }
+
 
 // function handleCredentialResponse(response) {
-//    // decodeJwtResponse() is a custom function defined by you
-//    // to decode the credential response.
-//    const responsePayload = decodeJwtResponse(response.credential);
-
-//    console.log("ID: " + responsePayload.sub);
-//    console.log('Full Name: ' + responsePayload.name);
-//    console.log('Given Name: ' + responsePayload.given_name);
-//    console.log('Family Name: ' + responsePayload.family_name);
-//    console.log("Image URL: " + responsePayload.picture);
-//    console.log("Email: " + responsePayload.email);
-// }
+//    console.log("Encoded JWT ID token: " + response.credential);
+//  }
+//  window.onload = function () {
+//    google.accounts.id.initialize({
+//      client_id: "86756801876-v67f8v560bqp6jtnqj32la891db4llq3.apps.googleusercontent.com",
+//      callback: handleCredentialResponse
+//    });
+//    google.accounts.id.renderButton(
+//      document.getElementById("buttonDiv"),
+//      { theme: "outline", size: "large" }  // customization attributes
+//    );
+//    google.accounts.id.prompt(); // also display the One Tap dialog
+//  }
 
 var googleButton = document.getElementById('google-button');
+var container = document.getElementsByClassName('container')[0];
+var img = document.getElementsByClassName('img')[0];
+var getName = document.getElementsByClassName('name')[0];
+var id = document.getElementsByClassName('id')[0];
+var email2 = document.getElementsByClassName('email')[0];
 
-
-
+// function to get response
 function handleCredentialResponse(response) {
-   console.log("Encoded JWT ID token: " + response.credential);
- }
- window.onload = function () {
+   const responsePayload = decodeJwtResponse(response.credential);
+   img.src = responsePayload.picture;
+   getName.innerHTML = responsePayload.name;
+   id.innerHTML = responsePayload.sub;
+   email.innerHTML = responsePayload.email2;
+   container.style.display = 'inline-block';
+   googleButton.style.display = 'none'
+}
+
+window.onload = function () {
    google.accounts.id.initialize({
-     client_id: "86756801876-v67f8v560bqp6jtnqj32la891db4llq3.apps.googleusercontent.com",
-     callback: handleCredentialResponse
+         // replace your client id below
+         client_id: "742014186560-mg14hm935ung3sjh51pgmcr97qkrtn37.apps.googleusercontent.com",
+         callback: handleCredentialResponse,
+         auto_select: true,
+         auto: true
    });
    google.accounts.id.renderButton(
-     document.getElementById("buttonDiv"),
-     { theme: "outline", size: "large" }  // customization attributes
+         document.getElementById("google-button"),
+         { theme: "filled_blue", size: "medium", width: '200' }  // customization attributes
    );
-   google.accounts.id.prompt(); // also display the One Tap dialog
- }
+   // also display the One Tap dialog on right side
+   // important for auto login
+   google.accounts.id.prompt(); 
+}
+
+// function to decode the response.credential
+function decodeJwtResponse(token) {
+   var base64Url = token.split('.')[1];
+   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+   var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+   }).join(''));
+   return JSON.parse(jsonPayload);
+}
+
+function signOut() {
+   google.accounts.id.disableAutoSelect();
+   // do anything on logout
+   location.reload();
+}
 
 
