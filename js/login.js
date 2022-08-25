@@ -1,3 +1,5 @@
+// Log in only if email and password are completed 
+
 const submit = document.getElementById("submit");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
@@ -28,10 +30,28 @@ const form = document.getElementsByClassName("form");
      } else {
         password.classList.remove("alert-input");
         alert_p[1].innerHTML = ""
-     }
+   }
+
+    // Local Storage 
+
+   localStorage.setItem('emailUsusario', email.value);
+   let storage = localStorage.getItem('emailUsusario');
+   console.log(storage);
+   return storage;
 
  })
 
+// document.addEventListener("DOMContentLoaded", function() {
+
+//    if (localStorage.getItem('emailUsusario')) {
+//       window.location.href = "portada.html";
+//    }
+
+// })
+
+
+
+// Google log in 
 
 function redirect() {
    window.location.href = "portada.html";
