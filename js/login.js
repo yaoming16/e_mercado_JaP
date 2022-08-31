@@ -10,13 +10,17 @@ const form = document.getElementsByClassName("form");
 
      if (email.value.trim() !== ""  && password.value.trim() !== "") {
 
-        form.onsubmit = "return true";
-        window.location.href = "portada.html" ;
+      form.onsubmit = "return true";
+
+      // Local Storage 
+      localStorage.setItem('emailUsusario', email.value);
+
+      window.location.href = "portada.html" ;
 
      } 
      if (email.value.trim() === "") {
-        email.classList = "alert-input";
-        alert_p[0].innerHTML = "Ingresa tu e-mail "
+      email.classList = "alert-input";
+      alert_p[0].innerHTML = "Ingresa tu e-mail "
         
      } else {
       email.classList.remove("alert-input");
@@ -24,31 +28,23 @@ const form = document.getElementsByClassName("form");
    }
      
      if (password.value.trim() === "") {
-        password.classList = "alert-input";
-        alert_p[1].innerHTML = "Ingresa tu constraseña "
+      password.classList = "alert-input";
+      alert_p[1].innerHTML = "Ingresa tu constraseña "
         
      } else {
-        password.classList.remove("alert-input");
-        alert_p[1].innerHTML = ""
+      password.classList.remove("alert-input");
+      alert_p[1].innerHTML = ""
    }
-
-    // Local Storage 
-
-   localStorage.setItem('emailUsusario', email.value);
-   let storage = localStorage.getItem('emailUsusario');
-   console.log(storage);
-   return storage;
 
  })
 
-// document.addEventListener("DOMContentLoaded", function() {
+//Redirect the user if he is already loged
+window.addEventListener("load", function() {
+   if (localStorage.getItem("emailUsusario")){
+      window.location.href = "portada.html"
+   }
 
-//    if (localStorage.getItem('emailUsusario')) {
-//       window.location.href = "portada.html";
-//    }
-
-// })
-
+})
 
 
 // Google log in 

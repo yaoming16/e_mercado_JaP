@@ -1,3 +1,8 @@
+// User email 
+
+let email_location  = document.getElementsByClassName("user-email")
+email_location[0].innerHTML = localStorage.getItem('emailUsusario');
+
 // Load productos on the page 
 
 // url of the selected category
@@ -211,15 +216,6 @@ searchInput.addEventListener("input", async function(){
 
 })
 
-// let a = 3; 
-
-// if (a > 1 || a >2) {
-//     alert("asd");
-// }
-
-// let b = "asd"
-
-// if (b.match())
 
 
 
