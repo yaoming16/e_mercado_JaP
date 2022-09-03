@@ -1,3 +1,12 @@
+const sub_title = document.getElementById("sub-title");
+const container = document.getElementById("product-cont");
+const filterMin = document.getElementById("rangeFilterCountMin");
+const filterMax = document.getElementById("rangeFilterCountMax");
+const ascPriceFilter = document.getElementById("sortAsc");
+const descPriceFilter = document.getElementById("sortDesc");
+const relFilter = document.getElementById("sortByCount")
+
+
 // User email 
 
 let email_location  = document.getElementsByClassName("user-email")
@@ -29,14 +38,12 @@ const prod_url = "https://japceibal.github.io/emercado-api/cats_products/" + loc
 
 // function to show the corresponding subtitle depending on the selected category 
 function subTitle(category) {
-    let sub_title = document.getElementById("sub-title");
     let content = "Veras aquí todos los productos de la categoría " + category.catName;
     sub_title.innerHTML = content;
 }
 
 // function to add the products information to the page 
 function addProduct(jsonData) {
-    const container = document.getElementById("product-cont");
     let content_to_append = "" ;
     let products = jsonData.products;
     
@@ -64,11 +71,12 @@ function addProduct(jsonData) {
 // event to show the products on the page when the dom is loaded 
 document.addEventListener("DOMContentLoaded", async function() {
     let productData = await jsonData(prod_url);
-        if (productData.status === "ok") {
-            let productInfo = productData.data ;
-            addProduct(productInfo);
-            subTitle(productInfo);
-        }
+    if (productData.status === "ok") {
+        let productInfo = productData.data ;
+        addProduct(productInfo);
+        subTitle(productInfo);
+    }
+    
 })
 
 // Filter by price 
@@ -77,8 +85,6 @@ let filterPriceBtn = document.getElementById("rangeFilterCount");
 
 // callback function to filter by prices
 function priceFilter(arrayelement) {
-    let filterMin = document.getElementById("rangeFilterCountMin");
-    let filterMax = document.getElementById("rangeFilterCountMax");
     let minPrice = filterMin.value;
     let maxPrice = filterMax.value;
 
@@ -106,8 +112,8 @@ filterPriceBtn.addEventListener("click", async function(){
 let clearFilterBtn = document.getElementById("clearRangeFilter");
 
 clearFilterBtn.addEventListener("click", async function(){
-    document.getElementById("rangeFilterCountMin").value = "";
-    document.getElementById("rangeFilterCountMax").value = "";
+    filterMin.value = "";
+    filterMax.value = "";
     
     let productData = await jsonData(prod_url);
         if (productData.status === "ok") {
@@ -118,10 +124,6 @@ clearFilterBtn.addEventListener("click", async function(){
 });
 
 // Order products by price 
-
-let ascPriceFilter = document.getElementById("sortAsc");
-let descPriceFilter = document.getElementById("sortDesc");
-let relFilter = document.getElementById("sortByCount")
 
 // sort function by price 
 function sortPrice(data, method) {
@@ -202,11 +204,9 @@ function search(text,data) {
 }
 
 searchInput.addEventListener("input", async function(){
-//  alert("asd");
 
     let texToSearch = searchInput.value;
 
-// alert(texToSearch);
     let productData = await jsonData(prod_url);
     if (productData.status === "ok") {
         let productInfo = productData.data;
