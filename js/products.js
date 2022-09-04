@@ -13,6 +13,7 @@ const clearFilterBtn = document.getElementById("clearRangeFilter");
 let listAfterSearch = {};
 let currentList = {};
 let productInfo = {};
+let i = 0;
 
 // User email
 
@@ -92,6 +93,7 @@ filterPriceBtn.addEventListener("click", function(){
     filter.products = productInfo.products.filter(priceFilter);
     addProduct(filter);
     currentList = filter;
+    i = 0;
 })
 
 // Clear filter
@@ -102,6 +104,7 @@ clearFilterBtn.addEventListener("click", function(){
     
     addProduct(productInfo);
     currentList = productInfo;
+    i = 0;
 
 });
 
@@ -133,10 +136,8 @@ function sortPrice(data, method) {
 
 // function to search a string in the title and description 
 function search(text,data) {
-
     let productsSearchresult = [];
     let lowerText = text.toLowerCase();
-    console.log(lowerText);
     let result = {};
 
     for (let i = 0; i < data.products.length; i++) {
@@ -145,8 +146,9 @@ function search(text,data) {
         let lowerDescription = data.products[i].description.toLowerCase();
 
         if ((lowerTitle.match(lowerText) !== null || lowerDescription.match(lowerText) !== null)) {
-            productsSearchresult.push(data.products[i]);   
-        } 
+            productsSearchresult.push(data.products[i]);
+            
+        }
     }
     
     result.products = productsSearchresult;
@@ -156,30 +158,59 @@ function search(text,data) {
 
 // search bar. 
 searchInput.addEventListener("input",  function(){
-    let texToSearch = searchInput.value.trim();
+
+    let texToSearch = searchInput.value;
     listAfterSearch = search(texToSearch,currentList);
-    addProduct(listAfterSearch); 
+    addProduct(listAfterSearch);
+    if (searchInput.value != "") {
+        i = 1;
+    } else {
+        i = 0;
+    }
+    
 })
 
 
 // Para los tres botones:
-// Van a ordenar el resultado de lo que el usuario busque en la searchbar. Si el usuario no ingresa ningún texto se va a ordenar la lista completa, en caso ocntrario se ordena los
-// productos que resultaron de la busqueda. 
+// currentList contiene la información de los productos que se ven si no se está utilizando la barra de busqueda. Si el usuario usa la barra de busqueda, el texto ingresado por el usuario se busca en la descripción y título de los productos en currentList
+// y luego se muestran en la pantalla y se guarda su información en listAfterSearch. 
+// Si el usuario usa la barra de busqueda i = 1. Los botones para ordenar (por precio y relevancia) van a ordenar listAfterSearch.
+// Si el usuario no usa la barra de busqueda i = 0. Los botones para ordenar (por precio y relevancia) van a ordenar currentList.
 
 // sort by asc price. 
 ascPriceFilter.addEventListener("click",  function() {
-    sortPrice(listAfterSearch, "asc"); 
-    addProduct(listAfterSearch);      
+    if (i == 0){
+        sortPrice(currentList, "asc"); 
+        addProduct(currentList);
+     } else {
+        sortPrice(listAfterSearch, "asc"); 
+        addProduct(listAfterSearch);
+     }
+    
+        
 })
 
 // sort by desc price
 descPriceFilter.addEventListener("click",  function() {
-    sortPrice(listAfterSearch, "desc"); 
-    addProduct(listAfterSearch);
+    if (i == 0){
+        sortPrice(currentList, "desc"); 
+        addProduct(currentList);
+     } else {
+        sortPrice(listAfterSearch, "desc"); 
+        addProduct(listAfterSearch);
+     }
+    
+
 })
 
 // order by relevance 
 relFilter.addEventListener("click",  function() {
-    sortPrice(listAfterSearch, "rel"); 
-    addProduct(listAfterSearch);
+    if (i == 0){
+        sortPrice(currentList, "rel"); 
+        addProduct(currentList);
+     } else {
+        sortPrice(listAfterSearch, "rel"); 
+        addProduct(listAfterSearch);
+     }
+
 })
