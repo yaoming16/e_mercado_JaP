@@ -10,8 +10,9 @@ const email_location  = document.getElementsByClassName("user-email")
 const searchInput = document.getElementById("search")
 const clearFilterBtn = document.getElementById("clearRangeFilter");
 
-currentList = {};
-productInfo = {};
+let listAfterSearch = {};
+let currentList = {};
+let productInfo = {};
 
 // User email
 
@@ -130,33 +131,12 @@ function sortPrice(data, method) {
     return data;
 }
 
-// sort by asc price
-ascPriceFilter.addEventListener("click",  function() {
-    sortPrice(currentList, "asc"); 
-    addProduct(currentList);
-        
-})
-
-// sort by desc price
-descPriceFilter.addEventListener("click",  function() {
-    sortPrice(currentList, "desc"); 
-    addProduct(currentList);
-
-})
-
-// order by relevance 
-relFilter.addEventListener("click",  function() {
-    sortPrice(currentList, "rel"); 
-    addProduct(currentList);
-
-})
-
-// Search bar 
-
 // function to search a string in the title and description 
 function search(text,data) {
+
     let productsSearchresult = [];
     let lowerText = text.toLowerCase();
+    console.log(lowerText);
     let result = {};
 
     for (let i = 0; i < data.products.length; i++) {
@@ -165,9 +145,8 @@ function search(text,data) {
         let lowerDescription = data.products[i].description.toLowerCase();
 
         if ((lowerTitle.match(lowerText) !== null || lowerDescription.match(lowerText) !== null)) {
-            productsSearchresult.push(data.products[i]);
-            
-        }
+            productsSearchresult.push(data.products[i]);   
+        } 
     }
     
     result.products = productsSearchresult;
@@ -175,19 +154,32 @@ function search(text,data) {
 
 }
 
-searchInput.addEventListener("input", async function(){
-
-
-    let texToSearch = searchInput.value;
-    let result = search(texToSearch,currentList);
-    addProduct(result);
-    currentList = result;
+// search bar. 
+searchInput.addEventListener("input",  function(){
+    let texToSearch = searchInput.value.trim();
+    listAfterSearch = search(texToSearch,currentList);
+    addProduct(listAfterSearch); 
 })
 
 
+// Para los tres botones:
+// Van a ordenar el resultado de lo que el usuario busque en la searchbar. Si el usuario no ingresa ningún texto se va a ordenar la lista completa, en caso ocntrario se ordena los
+// productos que resultaron de la busqueda. 
 
+// sort by asc price. 
+ascPriceFilter.addEventListener("click",  function() {
+    sortPrice(listAfterSearch, "asc"); 
+    addProduct(listAfterSearch);      
+})
 
-    
-    
+// sort by desc price
+descPriceFilter.addEventListener("click",  function() {
+    sortPrice(listAfterSearch, "desc"); 
+    addProduct(listAfterSearch);
+})
 
-
+// order by relevance 
+relFilter.addEventListener("click",  function() {
+    sortPrice(listAfterSearch, "rel"); 
+    addProduct(listAfterSearch);
+})
