@@ -76,3 +76,17 @@
         margin-top: 1rem;
     }
 }
+
+#search-bar-container {
+    margin: 1rem 0 0.5rem 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+}
+
+#search {
+    width: 100%;
+    margin-left: 1rem;
+}
+

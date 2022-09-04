@@ -78,7 +78,8 @@ function priceFilter(arrayelement) {
 }
 
 // filter by price when the button is pressed
-filterPriceBtn.addEventListener("click", async function(){
+filterPriceBtn.addEventListener("click", function(){
+    searchInput.value = "";
     let filter = {};
     filter.products = productInfo.products.filter(priceFilter);
     addProduct(filter);
@@ -86,7 +87,7 @@ filterPriceBtn.addEventListener("click", async function(){
 })
 
 // Clear filter
-clearFilterBtn.addEventListener("click", async function(){
+clearFilterBtn.addEventListener("click", function(){
     filterMin.value = "";
     filterMax.value = "";
     searchInput.value = "";
@@ -168,6 +169,7 @@ function search(text,data) {
 }
 
 searchInput.addEventListener("input", async function(){
+
 
     let texToSearch = searchInput.value;
     let result = search(texToSearch,currentList);
