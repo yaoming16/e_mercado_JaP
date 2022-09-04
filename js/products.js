@@ -5,36 +5,20 @@ const filterMax = document.getElementById("rangeFilterCountMax");
 const ascPriceFilter = document.getElementById("sortAsc");
 const descPriceFilter = document.getElementById("sortDesc");
 const relFilter = document.getElementById("sortByCount")
+const filterPriceBtn = document.getElementById("rangeFilterCount");
+const email_location  = document.getElementsByClassName("user-email")
+const searchInput = document.getElementById("search")
 
+currentList = [];
+productInfo = [];
 
 // User email 
-
-let email_location  = document.getElementsByClassName("user-email")
 email_location[0].innerHTML = localStorage.getItem('emailUsusario');
 
 // Load productos on the page 
 
 // url of the selected category
 const prod_url = "https://japceibal.github.io/emercado-api/cats_products/" + localStorage.getItem("catID") + ".json";
-
-// function to return an array with the date of each product 
- async function jsonData(url) {
-    const result = {};
-    try {
-        const response = await fetch(url);
-        if (response.ok) {
-            result.data = await response.json();
-            result.status = "ok";
-        } else {
-            throw Error(response.statusText);    
-        }
-    } 
-    catch (error) {
-        result.status = 'error';
-        result.data = error;
-    }
-    return result;
-}
 
 // function to show the corresponding subtitle depending on the selected category 
 function subTitle(category) {
@@ -72,16 +56,14 @@ function addProduct(jsonData) {
 document.addEventListener("DOMContentLoaded", async function() {
     let productData = await jsonData(prod_url);
     if (productData.status === "ok") {
-        let productInfo = productData.data ;
+        productInfo = productData.data ;
         addProduct(productInfo);
         subTitle(productInfo);
+        currentList = productInfo;
     }
-    
 })
 
 // Filter by price 
-
-let filterPriceBtn = document.getElementById("rangeFilterCount");
 
 // callback function to filter by prices
 function priceFilter(arrayelement) {
@@ -102,9 +84,8 @@ filterPriceBtn.addEventListener("click", async function(){
             let productInfo = productData.data ;
             productInfo.products = productInfo.products.filter(priceFilter);
             addProduct(productInfo);
-
+            currentList = productInfo;
         }
-   
 })
 
 // Clear filter
@@ -114,12 +95,15 @@ let clearFilterBtn = document.getElementById("clearRangeFilter");
 clearFilterBtn.addEventListener("click", async function(){
     filterMin.value = "";
     filterMax.value = "";
+    searchInput.value = "";
     
     let productData = await jsonData(prod_url);
         if (productData.status === "ok") {
             let productInfo = productData.data ;
             addProduct(productInfo);
+            currentList = productInfo;
         }
+    
     
 });
 
@@ -150,37 +134,27 @@ function sortPrice(data, method) {
 }
 
 // sort by asc price
-ascPriceFilter.addEventListener("click", async function() {
-    let productData = await jsonData(prod_url);
-        if (productData.status === "ok") {
-            let productInfo = productData.data ;
-            sortPrice(productInfo, "asc"); 
-            addProduct(productInfo);
-        }
+ascPriceFilter.addEventListener("click",  function() {
+    sortPrice(currentList, "asc"); 
+    addProduct(currentList);
+        
 })
 
 // sort by desc price
-descPriceFilter.addEventListener("click", async function() {
-    let productData = await jsonData(prod_url);
-        if (productData.status === "ok") {
-            let productInfo = productData.data ;
-            sortPrice(productInfo, "desc"); 
-            addProduct(productInfo);
-        }
+descPriceFilter.addEventListener("click",  function() {
+    sortPrice(currentList, "desc"); 
+    addProduct(currentList);
+
 })
 
 // order by relevance 
-relFilter.addEventListener("click", async function() {
-    let productData = await jsonData(prod_url);
-        if (productData.status === "ok") {
-            let productInfo = productData.data ;
-            sortPrice(productInfo, "rel"); 
-            addProduct(productInfo);
-        }
+relFilter.addEventListener("click",  function() {
+    sortPrice(currentList, "rel"); 
+    addProduct(currentList);
+
 })
 
 // Search bar 
-let searchInput = document.getElementById("search")
 
 // function to search a string in the title and description 
 function search(text,data) {

@@ -39,3 +39,22 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+// function to return an array with the date of each product 
+async function jsonData(url) {
+  const result = {};
+  try {
+      const response = await fetch(url);
+      if (response.ok) {
+          result.data = await response.json();
+          result.status = "ok";
+      } else {
+          throw Error(response.statusText);    
+      }
+  } 
+  catch (error) {
+      result.status = 'error';
+      result.data = error;
+  }
+  return result;
+}
