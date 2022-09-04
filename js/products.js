@@ -8,9 +8,10 @@ const relFilter = document.getElementById("sortByCount")
 const filterPriceBtn = document.getElementById("rangeFilterCount");
 const email_location  = document.getElementsByClassName("user-email")
 const searchInput = document.getElementById("search")
+const clearFilterBtn = document.getElementById("clearRangeFilter");
 
-currentList = [];
-productInfo = [];
+currentList = {};
+productInfo = {};
 
 // User email 
 email_location[0].innerHTML = localStorage.getItem('emailUsusario');
@@ -78,33 +79,21 @@ function priceFilter(arrayelement) {
 
 // filter by price when the button is pressed
 filterPriceBtn.addEventListener("click", async function(){
-    
-    let productData = await jsonData(prod_url);
-        if (productData.status === "ok") {
-            let productInfo = productData.data ;
-            productInfo.products = productInfo.products.filter(priceFilter);
-            addProduct(productInfo);
-            currentList = productInfo;
-        }
+    let filter = {};
+    filter.products = productInfo.products.filter(priceFilter);
+    addProduct(filter);
+    currentList = filter;
 })
 
 // Clear filter
-
-let clearFilterBtn = document.getElementById("clearRangeFilter");
-
 clearFilterBtn.addEventListener("click", async function(){
     filterMin.value = "";
     filterMax.value = "";
     searchInput.value = "";
     
-    let productData = await jsonData(prod_url);
-        if (productData.status === "ok") {
-            let productInfo = productData.data ;
-            addProduct(productInfo);
-            currentList = productInfo;
-        }
-    
-    
+    addProduct(productInfo);
+    currentList = productInfo;
+
 });
 
 // Order products by price 
@@ -160,6 +149,7 @@ relFilter.addEventListener("click",  function() {
 function search(text,data) {
     let productsSearchresult = [];
     let lowerText = text.toLowerCase();
+    let result = {};
 
     for (let i = 0; i < data.products.length; i++) {
         
@@ -172,22 +162,17 @@ function search(text,data) {
         }
     }
     
-    data.products = productsSearchresult;
-    return data;
+    result.products = productsSearchresult;
+    return result;
 
 }
 
 searchInput.addEventListener("input", async function(){
 
     let texToSearch = searchInput.value;
-
-    let productData = await jsonData(prod_url);
-    if (productData.status === "ok") {
-        let productInfo = productData.data;
-        search(texToSearch,productInfo);
-        addProduct(productInfo);
-    }
-
+    let result = search(texToSearch,currentList);
+    addProduct(result);
+    currentList = result;
 })
 
 
