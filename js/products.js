@@ -13,8 +13,15 @@ const clearFilterBtn = document.getElementById("clearRangeFilter");
 currentList = {};
 productInfo = {};
 
-// User email 
-email_location[0].innerHTML = localStorage.getItem('emailUsusario');
+// User email
+
+window.addEventListener("load", function() {
+    if (localStorage.getItem("emailUsusario")){
+        email_location[0].innerHTML = localStorage.getItem('emailUsusario');
+    } else {
+        window.location.href = "login.html"
+    }
+ }) 
 
 // Load productos on the page 
 

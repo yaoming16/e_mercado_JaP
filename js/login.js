@@ -15,7 +15,7 @@ const form = document.getElementsByClassName("form");
       // Local Storage 
       localStorage.setItem('emailUsusario', email.value);
 
-      window.location.href = "portada.html" ;
+      redirect() ;
 
      } 
      if (email.value.trim() === "") {
@@ -38,19 +38,13 @@ const form = document.getElementsByClassName("form");
 
  })
 
-//Redirect the user if he is already loged
-window.addEventListener("load", function() {
-   if (localStorage.getItem("emailUsusario")){
-      window.location.href = "portada.html"
-   }
 
-})
 
 
 // Google log in 
 
 function redirect() {
-   window.location.href = "portada.html";
+   window.location.href = "index.html";
 }
 
 
@@ -65,12 +59,12 @@ var email2 = document.getElementsByClassName('email')[0];
 // function to get response
 function handleCredentialResponse(response) {
    const responsePayload = decodeJwtResponse(response.credential);
+   localstorage.setItem("emailUsusario",responsePayload.email2);
    redirect();
 
    // img.src = responsePayload.picture;
    // getName.innerHTML = responsePayload.name;
    // id.innerHTML = responsePayload.sub;
-   localstorage.setItem("emailUsusario",responsePayload.email2);
    // container.style.display = 'inline-block';
    // googleButton.style.display = 'none'
 
