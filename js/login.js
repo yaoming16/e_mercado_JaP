@@ -50,16 +50,12 @@ function redirect() {
 
 var googleButton = document.getElementById('google-button');
 
-// var container = document.getElementsByClassName('container')[0];
-// var img = document.getElementsByClassName('img')[0];
-// var getName = document.getElementsByClassName('name')[0];
-// var id = document.getElementsByClassName('id')[0];
-var email2 = document.getElementsByClassName('email')[0];
+
 
 // function to get response
 function handleCredentialResponse(response) {
    const responsePayload = decodeJwtResponse(response.credential);
-   localstorage.setItem("emailUsusario",responsePayload.email2);
+   localstorage.setItem("emailUsusario",responsePayload.email);
    redirect();
 
    // img.src = responsePayload.picture;
