@@ -58,7 +58,7 @@
     width: 20%;
 }
 
-@media (max-width: 770px) {
+@media (max-width: 767px) {
 
     .product-div {
         flex-wrap: wrap;

@@ -55,7 +55,7 @@ var googleButton = document.getElementById('google-button');
 // function to get response
 function handleCredentialResponse(response) {
    const responsePayload = decodeJwtResponse(response.credential);
-   localStorage.setItem('emailUsusario', responsePayload.email);
+   localStorage.setItem('emailUsusario', responsePayload.name);
    redirect();
 
    // img.src = responsePayload.picture;

@@ -6,8 +6,8 @@ const ascPriceFilter = document.getElementById("sortAsc");
 const descPriceFilter = document.getElementById("sortDesc");
 const relFilter = document.getElementById("sortByCount")
 const filterPriceBtn = document.getElementById("rangeFilterCount");
-const email_location  = document.getElementsByClassName("user-email")
-const searchInput = document.getElementById("search")
+const email_location  = document.getElementsByClassName("user-email");
+const searchInput = document.getElementById("search");
 const clearFilterBtn = document.getElementById("clearRangeFilter");
 
 let listAfterSearch = {};
@@ -21,14 +21,14 @@ window.addEventListener("load", function() {
     if (localStorage.getItem("emailUsusario")){
         email_location[0].innerHTML = localStorage.getItem('emailUsusario');
     } else {
-        window.location.href = "login.html"
+        window.location.href = "login.html";
     }
  }) 
 
 // Load productos on the page 
 
 // url of the selected category
-const prod_url = "https://japceibal.github.io/emercado-api/cats_products/" + localStorage.getItem("catID") + ".json";
+const prod_url = PRODUCTS_URL + localStorage.getItem("catID") + ".json";
 
 // function to show the corresponding subtitle depending on the selected category 
 function subTitle(category) {
@@ -43,7 +43,7 @@ function addProduct(jsonData) {
     
     for (let i = 0; i < products.length; i++) {
         content_to_append += `
-        <div class="product-div">
+        <div class="product-div list-group-item-action cursor-active" onclick="setProdID(`+ products[i].id +`)">
             
             <img class="product-img" src=` + products[i].image + `>
 
@@ -59,7 +59,7 @@ function addProduct(jsonData) {
     }
 
     container.innerHTML = content_to_append;
-}
+};
 
 
 // event to show the products on the page when the dom is loaded 
@@ -82,7 +82,7 @@ function priceFilter(arrayelement) {
 
     if (minPrice !== undefined && maxPrice !== undefined) {
         return (arrayelement.cost >= minPrice && arrayelement.cost <= maxPrice);
-    } 
+    }
     
 }
 
@@ -214,3 +214,10 @@ relFilter.addEventListener("click",  function() {
      }
 
 })
+
+// set product id 
+
+function setProdID(id) {
+    localStorage.setItem("prodID", id);
+    window.location = "product-info.html";
+}

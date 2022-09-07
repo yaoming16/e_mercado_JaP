@@ -38,13 +38,80 @@
     </div>
 
   </nav>
+
   <main>
-    <div class="container">
+    <h1 id="prod-title"></h1> 
+
+    <div>
+      <div id="price-div">
+        <h2>Descripción</h2>
+        <p class="info-p"></p>
+      </div>
+
+      <div id="description-div">
+        <h2>Precio</h2>
+        <p class="info-p"></p>
+      </div>
+
+      <div id="category-div">
+        <h2>Categoría</h2>
+        <p class="info-p"></p>
+      </div>
+      
+      <div id="amout-div">
+        <h2>Cantidad vendida</h2>
+        <p class="info-p"></p>
+      </div>
+
+      <div id="img-div">
+        <h2>Imágenes ilustrativas</h2>
+      </div>
+
+      <div id="comment-div">
+        <h2>Comentarios</h2>
+        <div id="comments"></div>
+      </div>
+
+      <form action="#comment-div" onsubmit="return false">
+        <fieldset>
+          <legend>Comentar</legend>
+          <label for="text-area"></label>
+          <textarea id="text-area" name="comment-text"></textarea>
+          <label for="score">Tu puntuación</label>
+          <select id="score" name="score">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <button  type="submit" id="submit">Enviar</button>
+        </fieldset>
+        
+      </form>
+
+
+
+
+    </div>
+
+
+
+    
+
+
+
+
+
+
+
+    <!-- <div class="container">
       <div class="alert alert-danger text-center" role="alert">
         <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
       </div>
-    </div>
+    </div> -->
   </main>
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
