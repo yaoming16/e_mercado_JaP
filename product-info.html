@@ -10,6 +10,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  
 </head>
 
 <body>
@@ -40,69 +41,83 @@
   </nav>
 
   <main>
-    <h1 id="prod-title"></h1> 
 
-    <div>
+    <div class="container">
+
+      <h1 id="prod-title" class="h1 text-center"></h1>
+
       <div id="price-div">
-        <h2>Descripción</h2>
-        <p class="info-p"></p>
+        <h2  class="h2">Descripción</h2>
+        <p class="info-p fs-4"></p>
       </div>
 
       <div id="description-div">
-        <h2>Precio</h2>
-        <p class="info-p"></p>
+        <h2 class="h2">Precio</h2>
+        <p class="info-p fs-4"></p>
       </div>
 
       <div id="category-div">
-        <h2>Categoría</h2>
-        <p class="info-p"></p>
+        <h2 class="h2">Categoría</h2>
+        <p class="info-p fs-4"></p>
       </div>
       
       <div id="amout-div">
-        <h2>Cantidad vendida</h2>
-        <p class="info-p"></p>
+        <h2 class="h2">Cantidad vendida</h2>
+        <p class="info-p fs-4"></p>
       </div>
 
-      <div id="img-div">
-        <h2>Imágenes ilustrativas</h2>
+      <div id="">
+        <h2 class="h2">Imágenes ilustrativas</h2>
+      </div>
+
+      <div id="carousel" class="carousel slide" data-bs-ride="true">
+        <div class="carousel-indicators" id="carousel-li">
+          
+        </div>
+        <div class="carousel-inner" id="img-div">
+          
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
 
       <div id="comment-div">
-        <h2>Comentarios</h2>
+        <h2 class="h2">Comentarios</h2>
         <div id="comments"></div>
       </div>
 
       <form action="#comment-div" onsubmit="return false">
         <fieldset>
           <legend>Comentar</legend>
-          <label for="text-area"></label>
-          <textarea id="text-area" name="comment-text"></textarea>
-          <label for="score">Tu puntuación</label>
-          <select id="score" name="score">
+          <div class="mb-3">
+            <label for="text-area"></label>
+            <textarea id="text-area" name="comment-text" class="form-control"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="score">Tu puntuación</label>
+          <select id="score" name="score" class="form-select">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          <button  type="submit" id="submit">Enviar</button>
+          <button  type="submit" id="submit" class="btn btn-primary">Enviar</button>
+          </div>
+          
         </fieldset>
         
       </form>
 
-
-
-
     </div>
-
-
-
-    
-
-
-
-
-
 
 
     <!-- <div class="container">

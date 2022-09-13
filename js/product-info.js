@@ -5,6 +5,7 @@ const comments = document.querySelector("#comments");
 const text_area = document.querySelector("#text-area");
 const score = document.querySelector("#score")
 const submit = document.querySelector("#submit");
+const carousel = document.querySelector("#carousel-li")
 
 
 // User email
@@ -24,7 +25,8 @@ const prod_url = PRODUCT_INFO_URL + localStorage.getItem("prodID") + EXT_TYPE;
 
 // function to add info 
 function addInfo(data) {
-    contentToAppend = "";
+    contentToAppend_images = "";
+    contentToAppend_li = "";
 
     prod_title.innerHTML = data.name;
     prod_info[0].innerHTML = data.description;
@@ -32,15 +34,32 @@ function addInfo(data) {
     prod_info[2].innerHTML = data.category;
     prod_info[3].innerHTML = data.soldCount;
 
-    for (let i of data.images) {
-        contentToAppend += `
-        <div>
-            <img src=" `+ i +`">
+    contentToAppend_images += `
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="${data.images[0]}" >
         </div>
         ` 
+    contentToAppend_li += `
+    <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" ></button>
+    `
+
+    for (let i = 1; i <= data.images.length - 1; i++) {
+        contentToAppend_images += `
+        <div class="carousel-item ">
+            <img class="d-block w-100" src="${data.images[i]}" >
+        </div>
+        ` 
+        contentToAppend_li += `
+        <button type="button" data-bs-target="#carousel" data-bs-slide-to="${i}"  aria-current="true" ></button>
+        `   
     }
 
-    prod_img.innerHTML = contentToAppend;
+
+    console.log(contentToAppend_li)
+    console.log(contentToAppend_images)
+
+    prod_img.innerHTML = contentToAppend_images;
+    carousel.innerHTML = contentToAppend_li;
 }
 
 // Add stars function
@@ -51,12 +70,12 @@ function addStars(score) {
         <span class="fa fa-star checked"></span>
         `         
     }
-    for (let i = score + 1; i <= 5; i++ ) {
+    for (let j = score + 1; j <= 5; j++ ) {
         stars += `
         <span class="fa fa-star"></span>
         `         
     }
-    
+    console.log(stars);
     return stars;
 }
 
@@ -65,12 +84,14 @@ function addComments(data) {
     contentToAppend = "";
 
     for (i of data) {
+        
         contentToAppend += `
-        <div>
-            <p>${i.user}</p>
-            <p>${i.dateTime}</p>
-            <p>${addStars(i.score)}</p>
-            <p>${i.description}</p>
+        <div class="card text-bg-primary mb-3">
+            <div class="card-header">${i.user} ${i.dateTime}</div>
+            <div class="card-body">
+                <h5 class="card-title">${addStars(i.score)}</h5>
+                <p class="card-text">${i.description}</p>
+            </div>
         </div>
         `
     }
@@ -106,7 +127,9 @@ submit.addEventListener("click", function(){
         user: localStorage.getItem("emailUsusario"),
         dateTime: currentDay + " " + currentTime
     }
-    console.log(comentToAdd);
+    text_area.value = "";
+    score.value = "";
+ 
     commentInfo.unshift(comentToAdd);
     addComments(commentInfo);
 })
