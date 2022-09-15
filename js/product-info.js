@@ -54,10 +54,6 @@ function addInfo(data) {
         `   
     }
 
-
-    console.log(contentToAppend_li)
-    console.log(contentToAppend_images)
-
     prod_img.innerHTML = contentToAppend_images;
     carousel.innerHTML = contentToAppend_li;
 }
@@ -132,4 +128,6 @@ submit.addEventListener("click", function(){
  
     commentInfo.unshift(comentToAdd);
     addComments(commentInfo);
+    console.log(comentToAdd.score);
 })
+

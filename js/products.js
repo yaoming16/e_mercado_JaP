@@ -43,7 +43,7 @@ function addProduct(jsonData) {
     
     for (let i = 0; i < products.length; i++) {
         content_to_append += `
-        <div class="product-div list-group-item-action cursor-active" onclick="setProdID(`+ products[i].id +`)">
+        <div class="product-div  list-group-item-action cursor-active" onclick="setProdID(`+ products[i].id +`)">
             
             <img class="product-img" src=` + products[i].image + `>
 

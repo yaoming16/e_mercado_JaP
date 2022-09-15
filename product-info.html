@@ -42,35 +42,35 @@
 
   <main>
 
-    <div class="container">
+    <div class="container max-width">
 
-      <h1 id="prod-title" class="h1 text-center"></h1>
+      <h1 id="prod-title" class="h1 text-center mt-4 mb-4 text-center"></h1>
 
-      <div id="price-div">
-        <h2  class="h2">Descripción</h2>
-        <p class="info-p fs-4"></p>
+      <div id="price-div" class="mb-4">
+        <h2  class="h2 text-center ">Descripción</h2>
+        <p class="info-p fs-4 text-center"></p>
       </div>
 
-      <div id="description-div">
-        <h2 class="h2">Precio</h2>
-        <p class="info-p fs-4"></p>
+      <div id="description-div" class="mb-4">
+        <h2 class="h2 text-center">Precio</h2>
+        <p class="info-p fs-4 text-center"></p>
       </div>
 
-      <div id="category-div">
-        <h2 class="h2">Categoría</h2>
-        <p class="info-p fs-4"></p>
+      <div id="category-div" class="mb-4">
+        <h2 class="h2 text-center">Categoría</h2>
+        <p class="info-p fs-4 text-center"></p>
       </div>
       
-      <div id="amout-div">
-        <h2 class="h2">Cantidad vendida</h2>
-        <p class="info-p fs-4"></p>
+      <div id="amout-div" class="mb-4">
+        <h2 class="h2 text-center">Cantidad vendida</h2>
+        <p class="info-p fs-4 text-center "></p>
       </div>
 
-      <div id="">
-        <h2 class="h2">Imágenes ilustrativas</h2>
+      <div id="" class="mb-4">
+        <h2 class="h2 text-center">Imágenes ilustrativas</h2>
       </div>
 
-      <div id="carousel" class="carousel slide" data-bs-ride="true">
+      <div id="carousel" class="carousel slide mb-4" data-bs-ride="true">
         <div class="carousel-indicators" id="carousel-li">
           
         </div>
@@ -88,22 +88,22 @@
         </button>
       </div>
 
-      <div id="comment-div">
-        <h2 class="h2">Comentarios</h2>
+      <div id="comment-div" class="mb-4">
+        <h2 class="h2 text-center mb-4">Comentarios</h2>
         <div id="comments"></div>
       </div>
 
       <form action="#comment-div" onsubmit="return false">
         <fieldset>
           <legend>Comentar</legend>
-          <div class="mb-3">
+          <div class="mb-4">
             <label for="text-area"></label>
             <textarea id="text-area" name="comment-text" class="form-control"></textarea>
           </div>
 
           <div class="mb-3">
-            <label for="score">Tu puntuación</label>
-          <select id="score" name="score" class="form-select">
+            <label for="score" class="mb-2 fs-5">Tu puntuación</label>
+          <select id="score" name="score" class="form-select mb-4">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -144,7 +144,7 @@
       <div></div>
       <div></div>
     </div>
-  </div>
+  </div> 
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
