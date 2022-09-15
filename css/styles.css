@@ -33,25 +33,52 @@ nav a {
   }
 }
 
-.jumbotron {
-  height: 50vh;
-  padding: 5em inherit;
-  margin-bottom: 0;
-  background-color: #53C0FB;
-  background: url('../img/cover_back.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: black;
-  font-weight: bold;
-}
-
 @media (min-width: 768px) {
   .jumbotron {
     padding-top: 6rem;
     padding-bottom: 6rem;
   }
 }
+
+.jumbotron {
+  padding: 5em inherit;
+  margin-bottom: 0;
+  background-color: #53C0FB;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: black;
+  font-weight: bold;
+}
+
+@media (min-width: 1460px) {
+  .jumbotron {
+    height: 50vh;
+    background: url('../img/cover_back.png');
+    background-size: cover;
+  }
+}
+
+@media (min-width: 1030px) and (max-width: 1459px) {
+  .jumbotron {
+    height: 50vh;
+    background: url('../img/cover_back2.png');
+    background-size: cover;
+  }
+}
+
+@media (min-width: 50px) and (max-width: 1029px) {
+  .jumbotron {
+    height: 50vh;
+    background: url('../img/cover_back3.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #F8F9FA;
+  }
+}
+
+
+
 
 .jumbotron p:last-child {
   margin-bottom: 0;
@@ -216,7 +243,7 @@ a.custom-card:hover {
 .product-div {
   display: flex;
   flex-direction: row;
-  background-color: rgb(236, 234, 232);
+  background-color: rgb(243, 243, 243);
   width: 100%;
   margin: 0 0;
   padding: 1rem  0.5rem 1rem 2rem;
@@ -309,5 +336,4 @@ border-bottom: solid 1px gray;
   margin: auto auto;
   display: block;
 }
-
 
