@@ -118,7 +118,7 @@ submit.addEventListener("click", function(){
     let currentTime =  date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
     let comentToAdd = {
         product: localStorage.getItem("prodID"),
-        score: score.value,
+        score: parseInt(score.value),
         description: text_area.value,
         user: localStorage.getItem("emailUsusario"),
         dateTime: currentDay + " " + currentTime
