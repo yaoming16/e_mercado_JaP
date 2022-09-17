@@ -41,39 +41,43 @@ nav a {
 }
 
 .jumbotron {
+  background: url('../img/cover_back.png');
+  height: 50vh;
+  background-size: cover;
   padding: 5em inherit;
-  margin-bottom: 0;
-  background-color: #53C0FB;
+  background-color: #F8F9FA;
   background-position: center;
   background-repeat: no-repeat;
-  color: black;
-  font-weight: bold;
 }
 
-@media (min-width: 1460px) {
-  .jumbotron {
-    height: 50vh;
-    background: url('../img/cover_back.png');
-    background-size: cover;
-  }
-}
 
-@media (min-width: 1030px) and (max-width: 1459px) {
+@media (min-width: 1200px) and (max-width: 1459px) {
   .jumbotron {
     height: 50vh;
     background: url('../img/cover_back2.png');
-    background-size: cover;
+    background-size: contain;
+    background-color: #F8F9FA;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 }
 
-@media (min-width: 50px) and (max-width: 1029px) {
+@media (min-width: 0) and (max-width: 1199px) {
   .jumbotron {
-    height: 40vh;
+    height: 50vh;
     background: url('../img/cover_back3.png');
     background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
     background-color: #F8F9FA;
+    background-position: center;
+    background-repeat: no-repeat;
+
+  }
+}
+
+@media (max-width: 768px) {
+  .jumbotron {
+    height: 40vh;
+
   }
 }
 
@@ -287,7 +291,6 @@ border-bottom: solid 1px gray;
     flex-wrap: wrap;
     flex-direction: column;
     
-  
   }   
   
   .sold-amount {
