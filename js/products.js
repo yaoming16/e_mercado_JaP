@@ -15,15 +15,7 @@ let currentList = {};
 let productInfo = {};
 let i = 0;
 
-// User email
 
-window.addEventListener("load", function() {
-    if (localStorage.getItem("emailUsusario")){
-        email_location[0].innerHTML = localStorage.getItem('emailUsusario');
-    } else {
-        window.location.href = "login.html";
-    }
- }) 
 
 // Load productos on the page 
 

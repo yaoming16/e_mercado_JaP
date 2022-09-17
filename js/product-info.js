@@ -8,15 +8,7 @@ const submit = document.querySelector("#submit");
 const carousel = document.querySelector("#carousel-li")
 
 
-// User email
-window.addEventListener("load", function() {
-    if (localStorage.getItem("emailUsusario")){
-        let email_location  = document.getElementsByClassName("user-email");
-        email_location[0].innerHTML = localStorage.getItem('emailUsusario');
-    } else {
-        window.location.href = "login.html";
-    }
- }) 
+
 
 
 // url of the selected product
@@ -111,7 +103,7 @@ document.addEventListener("DOMContentLoaded", async function() {
     }
 })
 
-// add coment
+// add comment
 submit.addEventListener("click", function(){
     let date = new Date();
     let currentDay = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
