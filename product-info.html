@@ -31,7 +31,15 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-link user-email">
+          <li class="nav-item  dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="user-email" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="user-email">
+              <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+              <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+              <li><a class="dropdown-item" href="login.html" onclick="localStorage.removeItem('emailUsusario')">Cerrar Sesión</a></li>
+            </ul>
           </li>
         </ul>
        
@@ -111,21 +119,36 @@
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          <button  type="submit" id="submit" class="btn btn-primary">Enviar</button>
+          <button  type="submit" id="submit" class="btn btn-primary mb-5">Enviar</button>
           </div>
           
         </fieldset>
         
       </form>
 
+      <h2 class="h2 text-center mb-4">Productos relacionados</h2>
+      
+      <div id="carousel-relatedprod" class="carousel slide " data-bs-ride="false">
+        <div class="carousel-indicators" id="related-prod-li">
+          
+        </div>
+        <div class="carousel-inner" id="related-prod-img">
+
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-relatedprod" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel-relatedprod" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
     </div>
 
 
-    <!-- <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
-    </div> -->
   </main>
 
   <footer class="text-muted">

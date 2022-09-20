@@ -5,9 +5,9 @@ const comments = document.querySelector("#comments");
 const text_area = document.querySelector("#text-area");
 const score = document.querySelector("#score")
 const submit = document.querySelector("#submit");
-const carousel = document.querySelector("#carousel-li")
-
-
+const carouselProdImg = document.querySelector("#carousel-li");
+const carouselRelatedProd_li = document.querySelector("#related-prod-li");
+const carouselRelatedProd_img = document.querySelector("#related-prod-img");
 
 
 
@@ -17,8 +17,10 @@ const prod_url = PRODUCT_INFO_URL + localStorage.getItem("prodID") + EXT_TYPE;
 
 // function to add info 
 function addInfo(data) {
-    contentToAppend_images = "";
-    contentToAppend_li = "";
+    contentToAppendProd_images = "";
+    contentToAppendProd_li = "";
+    contentToAppendRelProd_images = "";
+    contentToAppendRelProd_li = "";
 
     prod_title.innerHTML = data.name;
     prod_info[0].innerHTML = data.description;
@@ -26,28 +28,62 @@ function addInfo(data) {
     prod_info[2].innerHTML = data.category;
     prod_info[3].innerHTML = data.soldCount;
 
-    contentToAppend_images += `
+    contentToAppendProd_images += `
         <div class="carousel-item active">
             <img class="d-block w-100" src="${data.images[0]}" >
         </div>
         ` 
-    contentToAppend_li += `
+        contentToAppendProd_li += `
     <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" ></button>
     `
 
     for (let i = 1; i <= data.images.length - 1; i++) {
-        contentToAppend_images += `
+        contentToAppendProd_images += `
         <div class="carousel-item ">
             <img class="d-block w-100" src="${data.images[i]}" >
         </div>
         ` 
-        contentToAppend_li += `
+        contentToAppendProd_li += `
         <button type="button" data-bs-target="#carousel" data-bs-slide-to="${i}"  aria-current="true" ></button>
         `   
     }
 
-    prod_img.innerHTML = contentToAppend_images;
-    carousel.innerHTML = contentToAppend_li;
+    prod_img.innerHTML = contentToAppendProd_images;
+    carouselProdImg.innerHTML = contentToAppendProd_li;
+
+    // add related products.
+    // class of h5 tag: d-none hiddes the label for small devices and d-md-block shows it again for medium devices
+    contentToAppendRelProd_images += `
+        <div class="carousel-item active cursor-active" onclick="setProdID(${data.relatedProducts[0].id})">
+            <img src="${data.relatedProducts[0].image}" class="d-block w-100">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 class="rel-prod-name">${data.relatedProducts[0].name}</h5>
+                <p></p>
+            </div>
+        </div>
+        ` 
+        contentToAppendRelProd_li += `
+        <button type="button" data-bs-target="#carousel-relatedprod" data-bs-slide-to="0" class="active" aria-current="true" ></button>
+    `
+
+    for (let i = 1; i <= data.relatedProducts.length - 1; i++) {
+        contentToAppendRelProd_images += `
+        <div class="carousel-item cursor-active"  onclick="setProdID(${data.relatedProducts[i].id})">
+            <img src="${data.relatedProducts[i].image}" class="d-block w-100">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 class="rel-prod-name">${data.relatedProducts[i].name}</h5>
+                <p></p>
+            </div>
+        </div>
+        ` 
+        contentToAppendRelProd_li += `
+        <button type="button" data-bs-target="#carousel-relatedprod" data-bs-slide-to="${i}" ></button>
+        `   
+    }
+
+    carouselRelatedProd_img.innerHTML = contentToAppendRelProd_images;
+    carouselRelatedProd_li.innerHTML = contentToAppendRelProd_li;
+
 }
 
 // Add stars function
@@ -63,7 +99,6 @@ function addStars(score) {
         <span class="fa fa-star"></span>
         `         
     }
-    console.log(stars);
     return stars;
 }
 
@@ -122,4 +157,7 @@ submit.addEventListener("click", function(){
     addComments(commentInfo);
     console.log(comentToAdd.score);
 })
+
+
+
 

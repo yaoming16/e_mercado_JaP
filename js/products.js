@@ -6,14 +6,14 @@ const ascPriceFilter = document.getElementById("sortAsc");
 const descPriceFilter = document.getElementById("sortDesc");
 const relFilter = document.getElementById("sortByCount")
 const filterPriceBtn = document.getElementById("rangeFilterCount");
-const email_location  = document.getElementsByClassName("user-email");
 const searchInput = document.getElementById("search");
 const clearFilterBtn = document.getElementById("clearRangeFilter");
 
 let listAfterSearch = {};
 let currentList = {};
 let productInfo = {};
-let i = 0;
+//  listToUse se va a usar para que dependiendo del valor que tenga al moento de aplicar un filtro, seleccionar el array que se va  a filtrar. 
+let listToUse = 0;
 
 
 
@@ -85,7 +85,7 @@ filterPriceBtn.addEventListener("click", function(){
     filter.products = productInfo.products.filter(priceFilter);
     addProduct(filter);
     currentList = filter;
-    i = 0;
+    listToUse = 0;
 })
 
 // Clear filter
@@ -96,7 +96,7 @@ clearFilterBtn.addEventListener("click", function(){
     
     addProduct(productInfo);
     currentList = productInfo;
-    i = 0;
+    listToUse = 0;
 
 });
 
@@ -155,9 +155,9 @@ searchInput.addEventListener("input",  function(){
     listAfterSearch = search(texToSearch,currentList);
     addProduct(listAfterSearch);
     if (searchInput.value != "") {
-        i = 1;
+        listToUse = 1;
     } else {
-        i = 0;
+        listToUse = 0;
     }
     
 })
@@ -166,12 +166,12 @@ searchInput.addEventListener("input",  function(){
 // Para los tres botones:
 // currentList contiene la información de los productos que se ven si no se está utilizando la barra de busqueda. Si el usuario usa la barra de busqueda, el texto ingresado por el usuario se busca en la descripción y título de los productos en currentList
 // y luego se muestran en la pantalla y se guarda su información en listAfterSearch. 
-// Si el usuario usa la barra de busqueda i = 1. Los botones para ordenar (por precio y relevancia) van a ordenar listAfterSearch.
-// Si el usuario no usa la barra de busqueda i = 0. Los botones para ordenar (por precio y relevancia) van a ordenar currentList.
+// Si el usuario usa la barra de busqueda listToUse = 1. Los botones para ordenar (por precio y relevancia) van a ordenar listAfterSearch.
+// Si el usuario no usa la barra de busqueda listToUse = 0. Los botones para ordenar (por precio y relevancia) van a ordenar currentList.
 
 // sort by asc price. 
 ascPriceFilter.addEventListener("click",  function() {
-    if (i == 0){
+    if (listToUse == 0){
         sortPrice(currentList, "asc"); 
         addProduct(currentList);
      } else {
@@ -184,7 +184,7 @@ ascPriceFilter.addEventListener("click",  function() {
 
 // sort by desc price
 descPriceFilter.addEventListener("click",  function() {
-    if (i == 0){
+    if (listToUse == 0){
         sortPrice(currentList, "desc"); 
         addProduct(currentList);
      } else {
@@ -197,7 +197,7 @@ descPriceFilter.addEventListener("click",  function() {
 
 // order by relevance 
 relFilter.addEventListener("click",  function() {
-    if (i == 0){
+    if (listToUse == 0){
         sortPrice(currentList, "rel"); 
         addProduct(currentList);
      } else {
@@ -207,9 +207,3 @@ relFilter.addEventListener("click",  function() {
 
 })
 
-// set product id 
-
-function setProdID(id) {
-    localStorage.setItem("prodID", id);
-    window.location = "product-info.html";
-}

@@ -327,7 +327,7 @@ border-bottom: solid 1px gray;
 
 /* product-info */
 
-#carousel {
+#carousel, #carousel-relatedprod{
   max-width: 800px;
   display: block;
   margin: auto auto;
@@ -343,5 +343,9 @@ border-bottom: solid 1px gray;
   display: block;
 }
 
-
+.rel-prod-name {
+  font-size: 3rem;
+  font-weight: 400;
+  background-color: black;
+}
 

@@ -62,9 +62,17 @@ async function jsonData(url) {
 // User email
 window.addEventListener("load", function() {
   if (localStorage.getItem("emailUsusario")){
-      let email_location  = document.getElementsByClassName("user-email");
-      email_location[0].innerHTML = localStorage.getItem('emailUsusario');
+      let email_location  = document.getElementById("user-email");
+      email_location.innerHTML = localStorage.getItem('emailUsusario');
   } else {
       window.location.href = "login.html";
   }
 }) 
+
+
+// set product id 
+
+function setProdID(id) {
+  localStorage.setItem("prodID", id);
+  window.location = "product-info.html";
+}

@@ -1,7 +1,6 @@
 // Log in only if email and password are completed 
 
 const submit = document.getElementById("submit");
-const email = document.getElementById("email");
 const password = document.getElementById("password");
 const alert_p = document.getElementsByClassName("alert-p");
 const form = document.getElementsByClassName("form");
