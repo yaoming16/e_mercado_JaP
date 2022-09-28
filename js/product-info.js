@@ -8,7 +8,7 @@ const submit = document.querySelector("#submit");
 const carouselProdImg = document.querySelector("#carousel-li");
 const carouselRelatedProd_li = document.querySelector("#related-prod-li");
 const carouselRelatedProd_img = document.querySelector("#related-prod-img");
-
+const alert_p = document.querySelector("#alert-p")
 
 
 // url of the selected product
@@ -55,25 +55,19 @@ function addInfo(data) {
     // class of h5 tag: d-none hiddes the label for small devices and d-md-block shows it again for medium devices
     contentToAppendRelProd_images += `
         <div class="carousel-item active cursor-active" onclick="setProdID(${data.relatedProducts[0].id})">
+            <h5 class="rel-prod-name">${data.relatedProducts[0].name}</h5>
             <img src="${data.relatedProducts[0].image}" class="d-block w-100">
-            <div class="carousel-caption d-none d-md-block">
-                <h5 class="rel-prod-name">${data.relatedProducts[0].name}</h5>
-                <p></p>
-            </div>
         </div>
         ` 
-        contentToAppendRelProd_li += `
+    contentToAppendRelProd_li += `
         <button type="button" data-bs-target="#carousel-relatedprod" data-bs-slide-to="0" class="active" aria-current="true" ></button>
     `
 
     for (let i = 1; i <= data.relatedProducts.length - 1; i++) {
         contentToAppendRelProd_images += `
         <div class="carousel-item cursor-active"  onclick="setProdID(${data.relatedProducts[i].id})">
-            <img src="${data.relatedProducts[i].image}" class="d-block w-100">
-            <div class="carousel-caption d-none d-md-block">
-                <h5 class="rel-prod-name">${data.relatedProducts[i].name}</h5>
-                <p></p>
-            </div>
+            <h5 class="rel-prod-name">${data.relatedProducts[i].name}</h5>
+            <img src="${data.relatedProducts[i].image}" class="d-block w-100">   
         </div>
         ` 
         contentToAppendRelProd_li += `
@@ -140,22 +134,24 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 // add comment
 submit.addEventListener("click", function(){
-    let date = new Date();
-    let currentDay = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
-    let currentTime =  date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
-    let comentToAdd = {
-        product: localStorage.getItem("prodID"),
-        score: parseInt(score.value),
-        description: text_area.value,
-        user: localStorage.getItem("emailUsusario"),
-        dateTime: currentDay + " " + currentTime
-    }
+    if (text_area.value.trim() !== "") {
+        let date = new Date();
+        let currentDay = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
+        let currentTime =  date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
+        let comentToAdd = {
+            product: localStorage.getItem("prodID"),
+            score: parseInt(score.value),
+            description: text_area.value,
+            user: localStorage.getItem("emailUsusario"),
+            dateTime: currentDay + " " + currentTime
+        }
     text_area.value = "";
     score.value = "";
- 
+    
     commentInfo.unshift(comentToAdd);
     addComments(commentInfo);
     console.log(comentToAdd.score);
+    }    
 })
 
 

@@ -5,6 +5,15 @@ const password = document.getElementById("password");
 const alert_p = document.getElementsByClassName("alert-p");
 const form = document.getElementsByClassName("form");
 
+// redirect if already loged in 
+
+window.addEventListener("load", function() {
+   if (localStorage.getItem("emailUsusario")){
+       window.location.href = "index.html";
+   }
+}) 
+
+
  submit.addEventListener("click", function() {
 
      if (email.value.trim() !== ""  && password.value.trim() !== "") {
