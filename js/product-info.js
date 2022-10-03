@@ -130,29 +130,82 @@ document.addEventListener("DOMContentLoaded", async function() {
         commentInfo = commentData.data ;
         addComments(commentInfo);
     }
+
+    // add new comment
+    submit.addEventListener("click", function(){
+        if (text_area.value.trim() !== "") {
+            let date = new Date();
+            let currentDay = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
+            let currentTime =  date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
+            let comentToAdd = {
+                product: localStorage.getItem("prodID"),
+                score: parseInt(score.value),
+                description: text_area.value,
+                user: localStorage.getItem("emailUsusario"),
+                dateTime: currentDay + " " + currentTime
+            }
+        text_area.value = "";
+        score.value = "";
+        
+        commentInfo.unshift(comentToAdd);
+        addComments(commentInfo);
+        console.log(comentToAdd.score);
+        } 
+        
+    })
+
+    //add to cart and buy buttons
+
+    const cartBtn = document.querySelector("#cart");
+    const buyBtn = document.querySelector("#buy");
+
+    cartBtn.addEventListener("click", ()=> {
+        let cart = [];
+        if (localStorage.getItem("cart")) {
+            cart = JSON.parse(localStorage.getItem("cart"));
+        }
+
+        // find if item is already on the cart
+        for (let element of cart) {
+            if(element[0] === prodInfo.id) {
+                element[1] += 1;
+                localStorage.setItem("cart", JSON.stringify(cart));
+            }
+
+            else {
+                let toSave = [prodInfo.id, 1]
+                cart.push(toSave);
+                localStorage.setItem("cart", JSON.stringify(cart));
+            }
+        }
+        
+    })
+
+    buyBtn.addEventListener("click", ()=> {
+        let cart = [];
+        if (localStorage.getItem("cart")) {
+            cart = JSON.parse(localStorage.getItem("cart"));
+        }
+
+        for (let element of cart) {
+            if(element[0] === prodInfo.id) {
+                element[1] += 1;
+                localStorage.setItem("cart", JSON.stringify(cart));
+                window.location = "cart.html";
+            }
+
+            else {
+                let toSave = [prodInfo.id, 1]
+                cart.push(toSave);
+                localStorage.setItem("cart", JSON.stringify(cart));
+                window.location = "cart.html";
+            }
+        }
+        
+    })
+
 })
 
-// add comment
-submit.addEventListener("click", function(){
-    if (text_area.value.trim() !== "") {
-        let date = new Date();
-        let currentDay = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
-        let currentTime =  date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
-        let comentToAdd = {
-            product: localStorage.getItem("prodID"),
-            score: parseInt(score.value),
-            description: text_area.value,
-            user: localStorage.getItem("emailUsusario"),
-            dateTime: currentDay + " " + currentTime
-        }
-    text_area.value = "";
-    score.value = "";
-    
-    commentInfo.unshift(comentToAdd);
-    addComments(commentInfo);
-    console.log(comentToAdd.score);
-    }    
-})
 
 
 
