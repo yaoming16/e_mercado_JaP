@@ -159,50 +159,80 @@ document.addEventListener("DOMContentLoaded", async function() {
     const cartBtn = document.querySelector("#cart");
     const buyBtn = document.querySelector("#buy");
 
-    cartBtn.addEventListener("click", ()=> {
-        let cart = [];
-        if (localStorage.getItem("cart")) {
-            cart = JSON.parse(localStorage.getItem("cart"));
-        }
-
-        // find if item is already on the cart
-        for (let element of cart) {
-            if(element[0] === prodInfo.id) {
-                element[1] += 1;
-                localStorage.setItem("cart", JSON.stringify(cart));
-            }
-
-            else {
-                let toSave = [prodInfo.id, 1]
-                cart.push(toSave);
-                localStorage.setItem("cart", JSON.stringify(cart));
-            }
-        }
-        
-    })
 
     buyBtn.addEventListener("click", ()=> {
+
+
+        // if the cart already has a product in it, we will get the cart info from the local storage and save it on cart (empty string)
+        // Otherwise, we will add the product on screen to the cart (empty string) and, after that, store it in the local storage
         let cart = [];
         if (localStorage.getItem("cart")) {
             cart = JSON.parse(localStorage.getItem("cart"));
-        }
 
-        for (let element of cart) {
-            if(element[0] === prodInfo.id) {
-                element[1] += 1;
-                localStorage.setItem("cart", JSON.stringify(cart));
-                window.location = "cart.html";
+            //now we search the cart array to see if the item was already in the cart
+            //we use the variable foundInTheCart to keep track if the current prod is in the cart already
+            let foundInTheCart = false;
+            for (let element of cart) {
+
+                //if we find an element of the array that has the id of the prod on screen we add +1 to the amout of that product in the cart
+                // foundInTheCart changes to true because the item is in the cart
+                if(element[0] === prodInfo.id) {
+                    element[1] += 1;
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    window.location = "cart.html";
+                    foundInTheCart = true;
+                }
             }
 
-            else {
+            // if the item was already in the cart, we won't need to add it again so this part won't execute. if it was't in the cart this adds an array containing the prod ID and the amount of prod tot the cart
+            if (foundInTheCart === false) {
                 let toSave = [prodInfo.id, 1]
                 cart.push(toSave);
                 localStorage.setItem("cart", JSON.stringify(cart));
                 window.location = "cart.html";
             }
+                
+        } else {
+            let toSave = [prodInfo.id, 1]
+            cart.push(toSave);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            window.location = "cart.html";
         }
-        
+ 
     })
+
+    cartBtn.addEventListener("click", ()=> {
+
+        let cart = [];
+        if (localStorage.getItem("cart")) {
+            cart = JSON.parse(localStorage.getItem("cart"));
+
+            let foundInTheCart = false;
+            for (let element of cart) {
+
+                if(element[0] === prodInfo.id) {
+                    element[1] += 1;
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    foundInTheCart = true;
+                }
+            }
+
+            if (foundInTheCart === false) {
+                let toSave = [prodInfo.id, 1]
+                cart.push(toSave);
+                localStorage.setItem("cart", JSON.stringify(cart));
+
+            }
+                
+        } else {
+            let toSave = [prodInfo.id, 1]
+            cart.push(toSave);
+
+        }
+ 
+    })
+
+    
 
 })
 
