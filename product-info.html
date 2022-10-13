@@ -52,60 +52,77 @@
 
     <div class="container max-width">
 
-      <h1 id="prod-title" class="h1 text-center mt-4 mb-4 text-center"></h1>
+      <h1 id="prod-title" class="h1 text-center mt-4 mb-4 text-center fw-bold"></h1>
 
-      <button type="button" id="buy">Comprar</button>
-      <button type="button" id ="cart">Agregar al Carrito</button>
+      <div class="bg-light row row-cols-1 row-cols-lg-2 border border-lg-secondary mb-4 rounded-3 border-4">
 
-      <div id="price-div" class="mb-4">
-        <h2  class="h2 text-center ">Descripción</h2>
-        <p class="info-p fs-4 text-center"></p>
-      </div>
+        <div class="col col-lg-4 m-auto mb-5 mt-5">
+          <div id="price-div" class="mb-4">
+            <h2  class="h2 text-center fw-bold">Descripción</h2>
+            <p class="info-p fs-5 text-center"></p>
+          </div>
+    
+          <div id="description-div" class="mb-4">
+            <h2 class="h2 text-center fw-bold">Precio</h2>
+            <p class="info-p fs-5 text-center"></p>
+          </div>
+    
+          <div id="category-div" class="mb-4">
+            <h2 class="h2 text-center fw-bold">Categoría</h2>
+            <p class="info-p fs-5 text-center"></p>
+          </div>
+          
+          <div id="amout-div" class="mb-4">
+            <h2 class="h2 text-center fw-bold">Cantidad vendida</h2>
+            <p class="info-p fs-5 text-center "></p>
+          </div>
 
-      <div id="description-div" class="mb-4">
-        <h2 class="h2 text-center">Precio</h2>
-        <p class="info-p fs-4 text-center"></p>
-      </div>
+          <div class="w-50 m-auto mt-5 mb-5 d-none d-lg-flex flex-column">
+            <button type="button" id="buy" class="mb-4 btn btn-primary">Comprar</button>
+            <button type="button" id ="cart" class="mb-2 btn btn-outline-primary">Agregar al Carrito</button>
+          </div>
 
-      <div id="category-div" class="mb-4">
-        <h2 class="h2 text-center">Categoría</h2>
-        <p class="info-p fs-4 text-center"></p>
+        </div>
+
+        <div class="col col-lg-8 m-auto">
+          <h2 class="h2 text-center mb-4 fw-bold">Imágenes ilustrativas</h2>
+
+          <div id="carousel" class="carousel carousel-fade slide mb-4" data-bs-ride="true">
+            <div class="carousel-indicators" id="carousel-li">
+            </div>
+            
+            <div class="carousel-inner" id="img-div"> 
+            </div>
+    
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+
+          <div class="d-flex flex-column w-50 m-auto mt-5 mb-5 d-lg-none">
+            <button type="button" id="buy" class="mb-4 btn btn-primary">Comprar</button>
+            <button type="button" id ="cart" class="mb-2 btn btn-outline-primary">Agregar al Carrito</button>
+          </div>
+                  
+        </div>
       </div>
       
-      <div id="amout-div" class="mb-4">
-        <h2 class="h2 text-center">Cantidad vendida</h2>
-        <p class="info-p fs-4 text-center "></p>
-      </div>
 
-      <div id="" class="mb-4">
-        <h2 class="h2 text-center">Imágenes ilustrativas</h2>
-      </div>
+      
 
-      <div id="carousel" class="carousel slide mb-4" data-bs-ride="true">
-        <div class="carousel-indicators" id="carousel-li">
-        </div>
-        
-        <div class="carousel-inner" id="img-div"> 
-        </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-
-      <div id="comment-div" class="mb-4">
-        <h2 class="h2 text-center mb-4">Comentarios</h2>
+      <div id="comment-div" class="mb-4  m-auto">
+        <h2 class="h2 text-center mb-4 fw-bold">Comentarios</h2>
         <div id="comments"></div>
       </div>
 
       <form action="#comment-div" onsubmit="return false">
         <fieldset>
-          <legend>Comentar</legend>
+          <legend class="">Comentar</legend>
           <div class="mb-4">
             <label for="text-area"></label>
             <textarea id="text-area" name="comment-text" class="form-control"></textarea>
@@ -120,7 +137,7 @@
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          <button  type="submit" id="submit" class="btn btn-primary mb-5">Enviar</button>
+          <button  type="submit" id="submit" class="btn btn-primary mb-5 w-25">Enviar</button>
           </div>
           
         </fieldset> 

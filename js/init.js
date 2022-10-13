@@ -76,3 +76,29 @@ function setProdID(id) {
   localStorage.setItem("prodID", id);
   window.location = "product-info.html";
 }
+
+
+// cart set localStorage with item from server
+
+const cart_url = CART_INFO_URL + "25801.json";
+
+async function setLocalCart() {
+  if (!localStorage.getItem("cart")) {
+    let cart = {};
+    let response = await jsonData(cart_url);
+    if (response.status === "ok") {
+      cart = response.data; 
+    }
+
+    let cartToSave = [];
+    for (let prod of cart.articles) {
+      cartToSave.push([prod.id,prod.count])
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cartToSave));
+
+  }
+}
+
+setLocalCart();
+

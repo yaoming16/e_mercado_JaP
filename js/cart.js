@@ -1,30 +1,27 @@
 const prodTable = document.querySelector("#prod-table")
 
-
-
-const cart_url = CART_INFO_URL + "25801.json";
-
 //Function to add the products in the cart
-function addCartProducts(obj) {
+function addCartProducts(array) {
 
     let contentToAppend = "";
     // numOfProd increments for each product stored in the cart.
     let numOfProd = 0;
-    for(let product of obj.articles) {
+    for(let product of array) {
 
-        numOfProd += 1;
-        let str = numOfProd.toString();
+        let strNumOfProd = numOfProd.toString();
         contentToAppend += `
         <tr>
-            <th scope="row"><img class="w-100" src="${product.image}"></th>
+            <th scope="row" class=""  style="width:15%"><img class="w-100" src="${product.image}"></th>
             <td class="text-nowrap">${product.name}</td>
             <td class="text-nowrap">${product.currency} ${product.unitCost}</td>
-            <td><input type="number" min="1" oninput="this.value = Math.abs(this.value)" value="${product.count}" onchange="subtotalCalculator(${str},this.value,${product.unitCost})"></input></td>
-            <td class="text-nowrap" >${product.currency} <span id="subTotal-${str}">${product.unitCost * product.count}<span></td>
+            <td class=""><input type="number" class="" min="1" oninput="this.value = Math.abs(this.value)" value="${product.count}" onchange="subtotalCalculator(${strNumOfProd},this.value,${product.unitCost})"></input></td>
+            <td class="text-nowrap" >${product.currency} <span id="subTotal-${strNumOfProd}">${product.unitCost * product.count}<span></td>
+            <td><button type="button" class="btn-close btn-warning closeBTN" aria-label="Close" onclick="deleteFromCart(${numOfProd})"></button></td>
         </tr>
         ` 
+        numOfProd += 1;
     }
-    prodTable.innerHTML += contentToAppend;
+    prodTable.innerHTML = contentToAppend;
 }
 
 // function to change subtotal
@@ -33,52 +30,57 @@ function subtotalCalculator(prodNum,quantity,cost) {
     let subTotal_td = document.querySelector(`#subTotal-${prodNum}`);
     let newSubTotal = quantity * cost;
     subTotal_td.innerHTML = newSubTotal;
+
+    localCart[prodNum][1] = quantity;
+    localStorage.setItem("cart",JSON.stringify(localCart));
+
 }
 
 
-let cart = [];
+
+//close BTN 
+
+const closeBTN = document.querySelectorAll(".closeBTN");
+
+function deleteFromCart(index) {
+    localCart.splice(index,1);
+    cartToAdd.splice(index,1);
+     
+    localStorage.setItem("cart",JSON.stringify(localCart));
+    addCartProducts(cartToAdd);
+}
+
+   
+let cartToAdd = [];
+let localCart = JSON.parse(localStorage.getItem("cart"));
 document.addEventListener("DOMContentLoaded", async ()=>{
-    let response = await jsonData(cart_url);
-    if (response.status === "ok") {
-      cart = response.data; 
-    }
     
 
     //get items saved in the local Storage
-    if (localStorage.getItem("cart")) {
-        const localCart = JSON.parse(localStorage.getItem("cart"));
-        console.log(localCart);
-        console.log(typeof localCart);
-        
-    
-        for(let array of localCart) {
-            
-            let prod = {};
-            const prod_url = PRODUCT_INFO_URL + array[0] + EXT_TYPE;
-            let cartProd = await jsonData(prod_url);
-            if (cartProd.status === "ok") {
-                prod = cartProd.data
-                console.log(prod);
-            }
-            
-            let itemToAdd = {
-                id: prod.id,
-                name: prod.name,
-                count: array[1],
-                unitCost: prod.cost,
-                currency: prod.currency,
-                image: prod.images[0]
 
-            }
-            
 
-            cart.articles.push(itemToAdd)
+    for(let prodarr of localCart) {
             
+        let prod = {};
+        const prod_url = PRODUCT_INFO_URL + prodarr[0] + EXT_TYPE;
+        let cartProd = await jsonData(prod_url);
+        if (cartProd.status === "ok") {
+            prod = cartProd.data
         }
+            
+        let itemToAdd = {
+            id: prod.id,
+            name: prod.name,
+            count: prodarr[1],
+            unitCost: prod.cost,
+            currency: prod.currency,
+            image: prod.images[0]
 
+        }
+            
+        cartToAdd.push(itemToAdd)    
     }
-    
 
-    addCartProducts(cart)
-
+    addCartProducts(cartToAdd)
 })
+

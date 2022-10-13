@@ -334,9 +334,7 @@ border-bottom: solid 1px gray;
 }
 
 
-.max-width {
-  max-width: 1000px;
-}
+
 
 #submit {
   margin: auto auto;
@@ -370,4 +368,5 @@ border-bottom: solid 1px gray;
   background-color: rgb(0, 0, 0, 15%);
   border-radius: 25px;
 }
+
 
