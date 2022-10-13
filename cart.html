@@ -52,64 +52,79 @@
   <main>
     <div class="container">
 
-      <h1 class="display-4 mt-3 mb-3 text-center">Carrito de compras</h1>
+      <h1 class="display-5 mt-3 mb-3 text-center">Carrito de compras</h1>
 
-      <h3 class="display-6 mt-3 mb-3 text-center">Artículos a comprar</h3>
+      <h3 class="display-6 mt-3 mb-4 text-center">Artículos a comprar</h3>
 
-      <table class="table table-striped">
-        <thead class="table-dark">
-          <tr>
-            <th scope="col"></th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Costo</th>
-            <th scope="col">Cantidad</th>
-            <th scope="col">Subtotal</th>
-          </tr>
-        </thead>
-        <tbody id="prod-table">
+      <div class="table-responsive">
+        <table class="table table-striped table-sm align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col"></th>
+              <th scope="col" class="text-center">Nombre</th>
+              <th scope="col" class="text-center">Costo</th>
+              <th scope="col" class="text-center">Cantidad</th>
+              <th scope="col" class="text-center">Subtotal</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody id="prod-table">
+            
+          </tbody>
+        </table>
+
+      </div>
+      
+
+
+      <form class="mt-4">
+        <div class="row row-cols-1">
+          <fieldset class="col">
+            <legend class="mb-3">Tipo de envío</legend>
+  
+            <div class="form-check mb-2">
+              <label for="premium">Premium 2 a 5 días (15%)</label>
+              <input id="premium" name="shipping" type="radio" class="form-check-input">
+            </div>
+  
+            <div class="form-check mb-2">
+              <label for="Express">Express 5 a 8 días (7%)</label>
+              <input id="Express" name="shipping" type="radio" class="form-check-input">
+            </div>
+  
+            <div class="form-check mb-4">
+              <label for="Standard">Standard 12 a 15 días (5%)</label>
+              <input id="Standard" name="shipping" type="radio" class="form-check-input">
+            </div>
+     
+          </fieldset>
+  
+          <fieldset class="col">
+  
+            <legend class="mb-3">Dirección de envío</legend>
+  
+            <div class="row row-cols-2">
+              <div>
+                <label for="street" class="form-label col">Calle</label>
+                <input type="text" id="street" name="street" class="form-control mb-3">
+              </div>
+              
+              <div>
+                <label for="number" class="form-label col">Número</label>
+                <input type="text" id="number" name="number" class="form-control mb-3">
+
+              </div>
+              
+              <div>
+                <label for="corner" class="form-label col">Esquína</label>
+                <input type="text" id="corner" name="corner" class="form-control mb-3">
+              </div>
           
-        </tbody>
-      </table>
-
-
-      <form>
-        <fieldset >
-          <legend class="mb-3">Tipo de envío</legend>
-
-          <div class="form-check mb-2">
-            <label for="premium">Premium 2 a 5 días (15%)</label>
-            <input id="premium" name="shipping" type="radio" class="form-check-input">
-          </div>
-
-          <div class="form-check mb-2">
-            <label for="Express">Express 5 a 8 días (7%)</label>
-            <input id="Express" name="shipping" type="radio" class="form-check-input">
-          </div>
-
-          <div class="form-check mb-4">
-            <label for="Standard">Standard 12 a 15 días (5%)</label>
-            <input id="Standard" name="shipping" type="radio" class="form-check-input">
-          </div>
-   
-        </fieldset>
-
-        <fieldset>
-
-          <legend class="mb-3">Dirección de envío</legend>
-
-          <div class="">
-            <label for="street" class="form-label">Calle</label>
-            <input type="text" id="street" name="street" class="form-control mb-3">
-          
-            <label for="number" class="form-label">Número</label>
-            <input type="text" id="number" name="number" class="form-control mb-3">
-         
-            <label for="corner" class="form-label">Esquína</label>
-            <input type="text" id="corner" name="corner" class="form-control mb-3">
-          </div>
-          
-
-        </fieldset>
+            </div>
+            
+          </fieldset>
+        </div>
+        
       </form>
 
     </div>

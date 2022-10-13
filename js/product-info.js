@@ -227,12 +227,12 @@ document.addEventListener("DOMContentLoaded", async function() {
         } else {
             let toSave = [prodInfo.id, 1]
             cart.push(toSave);
+            localStorage.setItem("cart", JSON.stringify(cart));
 
         }
  
     })
 
-    
 
 })
 
