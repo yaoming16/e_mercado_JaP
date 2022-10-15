@@ -7,6 +7,8 @@ const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 
+const cart_Icon = document.querySelector("#cart-icon");
+
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
 }
@@ -59,7 +61,7 @@ async function jsonData(url) {
   return result;
 }
 
-// User email
+// Set User email when page is loaded
 window.addEventListener("load", function() {
   if (localStorage.getItem("emailUsusario")){
       let email_location  = document.getElementById("user-email");
@@ -67,6 +69,7 @@ window.addEventListener("load", function() {
   } else {
       window.location.href = "login.html";
   }
+
 }) 
 
 
@@ -95,10 +98,21 @@ async function setLocalCart() {
       cartToSave.push([prod.id,prod.count])
     }
 
+    changeCartIcon(cartToSave);
     localStorage.setItem("cart", JSON.stringify(cartToSave));
 
+  } 
+}
+
+// function to change value of the cart icon. As argument gets the an array with the items. 
+function changeCartIcon(array) {
+  let amountProd = 0;
+  for(element of array) {
+    amountProd += element[1];
   }
+  cart_Icon.setAttribute("value", amountProd);
 }
 
 setLocalCart();
+changeCartIcon(JSON.parse(localStorage.getItem("cart")));
 

@@ -158,11 +158,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 //add to cart and buy buttons
 
-const cartBtn = document.querySelector("#cart");
-const buyBtn = document.querySelector("#buy");
-
-
-function buyBtnFunction() {
+function cartBtnFunction() {
 
 
     // if the cart already has a product in it, we will get the cart info from the local storage and save it on cart (empty string)
@@ -181,7 +177,6 @@ function buyBtnFunction() {
             if(element[0] === prodInfo.id) {
                 element[1] += 1;
                 localStorage.setItem("cart", JSON.stringify(cart));
-                window.location = "cart.html";
                 foundInTheCart = true;
             }
         }
@@ -191,48 +186,20 @@ function buyBtnFunction() {
             let toSave = [prodInfo.id, 1]
             cart.push(toSave);
             localStorage.setItem("cart", JSON.stringify(cart));
-            window.location = "cart.html";
         }
             
     } else {
         let toSave = [prodInfo.id, 1]
         cart.push(toSave);
         localStorage.setItem("cart", JSON.stringify(cart));
-        window.location = "cart.html";
     }
+    changeCartIcon(cart);
 
 };
 
-function cartBtnFunction() {
-
-    let cart = [];
-    if (localStorage.getItem("cart")) {
-        cart = JSON.parse(localStorage.getItem("cart"));
-
-        let foundInTheCart = false;
-        for (let element of cart) {
-
-            if(element[0] === prodInfo.id) {
-                element[1] += 1;
-                localStorage.setItem("cart", JSON.stringify(cart));
-                foundInTheCart = true;
-            }
-        }
-
-        if (foundInTheCart === false) {
-            let toSave = [prodInfo.id, 1]
-            cart.push(toSave);
-            localStorage.setItem("cart", JSON.stringify(cart));
-
-        }
-            
-    } else {
-        let toSave = [prodInfo.id, 1]
-        cart.push(toSave);
-        localStorage.setItem("cart", JSON.stringify(cart));
-
-    }
-
+function buyBtnFunction() {
+    cartBtnFunction();
+    window.location = "cart.html";
 };
 
 

@@ -372,3 +372,22 @@ border-bottom: solid 1px gray;
 #btn-div {
   z-index: 1;
 }
+
+/** Cart icon**/ 
+
+.bi-cart3:after{
+  content:attr(value);
+  font-size:15px;
+  color: #fff;
+  background: #343A40;
+  border-radius:50%;
+  padding: 0 5px;
+  position:relative;
+  left:-8px;
+  top:-8px;
+  opacity:0.9;
+}
+
+.bi-cart3 {
+  color: white;
+}

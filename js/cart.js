@@ -27,25 +27,28 @@ function addCartProducts(array) {
 // function to change subtotal
 function subtotalCalculator(prodNum,quantity,cost) {
     
+    // input value is a string so i need to use parseInt to get an integer as a result of the function 
+    quantity = parseInt(quantity);
     let subTotal_td = document.querySelector(`#subTotal-${prodNum}`);
     let newSubTotal = quantity * cost;
     subTotal_td.innerHTML = newSubTotal;
 
     localCart[prodNum][1] = quantity;
-    localStorage.setItem("cart",JSON.stringify(localCart));
 
+    changeCartIcon(localCart);
+    localStorage.setItem("cart",JSON.stringify(localCart));
 }
 
 
 
 //close BTN 
 
-const closeBTN = document.querySelectorAll(".closeBTN");
-
 function deleteFromCart(index) {
     localCart.splice(index,1);
     cartToAdd.splice(index,1);
-     
+    
+    console.log(localCart)
+    changeCartIcon(localCart);
     localStorage.setItem("cart",JSON.stringify(localCart));
     addCartProducts(cartToAdd);
 }
@@ -53,11 +56,10 @@ function deleteFromCart(index) {
    
 let cartToAdd = [];
 let localCart = JSON.parse(localStorage.getItem("cart"));
+
 document.addEventListener("DOMContentLoaded", async ()=>{
     
-
     //get items saved in the local Storage
-
 
     for(let prodarr of localCart) {
             
@@ -77,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async ()=>{
             image: prod.images[0]
 
         }
-            
+        
         cartToAdd.push(itemToAdd)    
     }
 
