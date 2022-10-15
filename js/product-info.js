@@ -194,6 +194,15 @@ function cartBtnFunction() {
         localStorage.setItem("cart", JSON.stringify(cart));
     }
     changeCartIcon(cart);
+    document.querySelector("#alert-div").innerHTML += `
+    <div class="lert alert-success alert-dismissible fade show" role="alert">
+        <strong>Se ha agregado corectamente al carrito!</strong> 
+        You should check in on some of those fields below.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    `
 
 };
 

@@ -10,14 +10,36 @@ function addCartProducts(array) {
 
         let strNumOfProd = numOfProd.toString();
         contentToAppend += `
-        <tr>
-            <th scope="row" class=""  style="width:15%"><img class="w-100" src="${product.image}"></th>
-            <td class="text-nowrap">${product.name}</td>
-            <td class="text-nowrap">${product.currency} ${product.unitCost}</td>
-            <td class=""><input type="number" class="" min="1" oninput="this.value = Math.abs(this.value)" value="${product.count}" onchange="subtotalCalculator(${strNumOfProd},this.value,${product.unitCost})"></input></td>
-            <td class="text-nowrap" >${product.currency} <span id="subTotal-${strNumOfProd}">${product.unitCost * product.count}<span></td>
-            <td><button type="button" class="btn-close btn-warning closeBTN" aria-label="Close" onclick="deleteFromCart(${numOfProd})"></button></td>
-        </tr>
+        <div class="row row-cols-2 pb-3 pt-3 border-bottom max-height-div">
+        
+            <div  class="col-4 col-lg-2" style="">
+                <img class="w-100" src="${product.image}">
+            </div>
+
+            <div class="col-8 col-lg-10 row row-cols-2">
+                <div  class="col-11 d-flex flex-column justify-content-around">
+
+
+                    <div class="d-flex">
+                        <p class="h3 text-nowrap ">${product.name}</p>
+                    </div>
+                
+                    <div class="text-nowrap">
+                        <p class="">Precio: <span>${product.currency} ${product.unitCost}</span></p>    
+                    </div>
+                    
+                    <div class="d-flex flex-column flex-md-row justify-content-md-between  align-items-md-center">
+                        <input type="number" id="input-${numOfProd}" class="w-50 form-control small-width mb-3" min="1" oninput="this.value = Math.abs(this.value)" value="${product.count}" onchange="subtotalCalculator(${strNumOfProd},this.value,${product.unitCost})"></input>
+                        <div class="text-nowrap"><span class="fw-bold">Subtotal: </span> ${product.currency}<span id="subTotal-${strNumOfProd}"> ${product.unitCost * product.count}<span></div> 
+                    </div>
+                </div>
+
+                <div class="col col-sm-1">
+                    <div><button type="button" class="btn d-none d-sm-block" aria-label="Close" onclick="deleteFromCart(${numOfProd})"><i class="h3 bi bi-trash3 h"></i></button></div>
+                </div>
+
+            </div>
+        </div>
         ` 
         numOfProd += 1;
     }
