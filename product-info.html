@@ -56,7 +56,16 @@
 
   <main>
 
-    <div class="container max-width">
+    <div class="container">
+
+      <div id="toast-div" class="toast align-items-center text-white bg-success border-0 fade position-fixed top-0 start-50 translate-middle-x" style="z-index:10" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            El producto ha sido agregado al carrito !
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
 
       <h1 id="prod-title" class="h1 text-center mt-4 mb-4 text-center fw-bold"></h1>
 
