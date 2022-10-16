@@ -35,7 +35,7 @@ function addCartProducts(array) {
                 </div>
 
                 <div class="col col-sm-1">
-                    <div><button type="button" class="btn d-none d-sm-block" aria-label="Close" onclick="deleteFromCart(${numOfProd})"><i class="h3 bi bi-trash3 h"></i></button></div>
+                    <div><button type="button" class="btn" aria-label="Close" onclick="deleteFromCart(${numOfProd})"><i class="h3 bi bi-trash3 h"></i></button></div>
                 </div>
 
             </div>
