@@ -65,47 +65,49 @@
             
       </div>
 
-      <form class="mt-4">
+      <form class="mt-4 needs-validation on ">
+
         <div class="row row-cols-1">
           <fieldset class="col">
-            <legend class="mb-3">Tipo de envío</legend>
+            <legend class="mb-3 h4">Tipo de envío</legend>
   
             <div class="form-check mb-2">
               <label for="premium">Premium 2 a 5 días (15%)</label>
-              <input id="premium" name="shipping" type="radio" class="form-check-input">
+              <input id="premium" name="shipping" type="radio" class="form-check-input" value="0.15" required>
             </div>
   
             <div class="form-check mb-2">
               <label for="Express">Express 5 a 8 días (7%)</label>
-              <input id="Express" name="shipping" type="radio" class="form-check-input">
+              <input id="Express" name="shipping" type="radio" class="form-check-input" value="0.07">
             </div>
   
             <div class="form-check mb-4">
               <label for="Standard">Standard 12 a 15 días (5%)</label>
-              <input id="Standard" name="shipping" type="radio" class="form-check-input">
+              <input id="Standard" name="shipping" type="radio" class="form-check-input" value="0.05">
             </div>
      
           </fieldset>
   
           <fieldset class="col">
   
-            <legend class="mb-3">Dirección de envío</legend>
+            <legend class="mb-3 h4">Dirección de envío</legend>
   
             <div class="row row-cols-2">
               <div>
                 <label for="street" class="form-label col">Calle</label>
-                <input type="text" id="street" name="street" class="form-control mb-3">
+                <input type="text" id="street" name="street" class="form-control mb-3" required>
+                
               </div>
               
               <div>
                 <label for="number" class="form-label col">Número</label>
-                <input type="text" id="number" name="number" class="form-control mb-3">
+                <input type="text" id="number" name="number" class="form-control mb-3" required>
 
               </div>
               
               <div>
                 <label for="corner" class="form-label col">Esquína</label>
-                <input type="text" id="corner" name="corner" class="form-control mb-3">
+                <input type="text" id="corner" name="corner" class="form-control mb-3" required>
               </div>
           
             </div>
@@ -113,14 +115,130 @@
           </fieldset>
         </div>
         
+      
+
+        <hr>
+
+        <div id="cost-div" class="mt-3 mb-5">
+
+          <h3 class="h4 mb-3">Costos</h3>
+
+          <div id="subtotal-div" class="d-flex flex-row justify-content-between border border-bottom-0">
+            <p>Subtotal</p>
+            <p>
+              USD
+              <span class="cost-div-item ms-2"></span>
+            </p>
+          </div>
+
+          <div id="shipping-div" class="d-flex flex-row justify-content-between border border-bottom-0">
+            <p class="">Costo de envío</p>
+            <p>
+              USD
+              <span class="cost-div-item ms-2"></span>
+            </p>
+          </div>
+
+          <div id="total-div" class="d-flex flex-row justify-content-between border">
+            <p>Total</p>
+            <p class="fw-bold">
+              USD
+              <span class="cost-div-item ms-2"></span>
+            </p>
+          </div>
+        </div>
+
+        <hr>
+
+        <div id="payment-method-div" class="mt-4">
+          <h3>Forma de pago</h3>
+
+          
+          <div id="modal-div" class="mt-4">
+    
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pay-modal">
+              Seleccionar
+            </button>
+
+            <div class="modal fade" id="pay-modal" tabindex="-1" aria-labelledby="pay-modal-label" aria-hidden="true">
+              <div class="modal-dialog">
+
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="pay-modal-label">Forma de pago</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+
+                  <div class="modal-body">
+                    
+                    <div class="d-flex flex-column">
+                      <div>
+                        <input type="radio" class="form-check-input" name="pay-method"  value="TBancaria" id="TBancaria">
+                        <label for="TBancaria" class="form-check-label">Transferencia bancaria</label>
+                      </div>
+                  
+                      <div>
+                        <input type="radio" class="form-check-input" name="pay-method" value="tarjeta" id="tarjeta">
+                        <label for="tarjeta" class="form-check-label">Tarjeta de crédito</label>
+                      </div>
+
+                      <hr>
+
+                      <div class="row row-cols-2">
+                        <div class="mb-3 col">
+                          <label for="numTarjeta" class="form-label">Número de tarjeta</label>
+                          <input type="number" class="form-control credit-card" id="numTarjeta" name="numTarjeta">
+                        </div>
+
+                        <div class="mb-3 col">
+                          <label for="codSeg" class="form-label">Email address</label>
+                          <input type="number" class="form-control credit-card" id="codSeg">
+                        </div>
+
+                        <div class="mb-3 col">
+                          <label for="vencimiento" class="form-label">Vencimiento</label>
+                          <input type="date" class="form-control credit-card" id="vencimiento">
+                        </div>
+
+                      </div>
+
+                      <hr>
+
+                      <div class="mb-3 col w-50">
+                        <label for="numCuenta" class="form-label">Número de cuenta</label>
+                        <input type="number" class="form-control" id="numCuenta">
+                      </div>
+
+                    </div>
+                    
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <span class="ms-2 ms-sm-4 text-nowrap" id="pay-method-span">No se ha seleccionado</span>
+            
+          </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-5" id="butBtn">
+          Finalizar compra
+        </button>
+
       </form>
 
+
     </div>
+
+    
+
+
   </main>
-
-
-
-
 
   <footer class="text-muted">
     <div class="container">

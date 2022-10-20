@@ -1,4 +1,7 @@
-const prodTable = document.querySelector("#prod-table")
+const prodTable = document.querySelector("#prod-table");
+const cost_div_items = document.querySelectorAll(".cost-div-item");
+const shipping = document.getElementsByName("shipping");
+
 
 //Function to add the products in the cart
 function addCartProducts(array) {
@@ -8,33 +11,30 @@ function addCartProducts(array) {
     let numOfProd = 0;
     for(let product of array) {
 
-        let strNumOfProd = numOfProd.toString();
         contentToAppend += `
         <div class="row row-cols-2 pb-3 pt-3 border-bottom max-height-div">
         
             <div  class="col-4 col-lg-2" style="">
-                <img class="w-100" src="${product.image}">
+                <img class="w-100 cursor-active" src="${product.image}" onClick="setProdID(${product.id})">
             </div>
 
-            <div class="col-8 col-lg-10 row row-cols-2">
+            <div class="col-8 col-lg-10 row row-cols-2 ">
                 <div  class="col-11 d-flex flex-column justify-content-around">
-
-
-                    <div class="d-flex">
-                        <p class="h3 text-nowrap ">${product.name}</p>
+                    <div>
+                        <p class="h3  ">${product.name}</p>
                     </div>
                 
-                    <div class="text-nowrap">
-                        <p class="">Precio: <span>${product.currency} ${product.unitCost}</span></p>    
+                    <div>
+                        <p class="text-nowrap">Precio: <span>${product.currency} ${product.unitCost}</span></p>    
                     </div>
                     
                     <div class="d-flex flex-column flex-md-row justify-content-md-between  align-items-md-center">
-                        <input type="number" id="input-${numOfProd}" class="w-50 form-control small-width mb-3" min="1" oninput="this.value = Math.abs(this.value)" value="${product.count}" onchange="subtotalCalculator(${strNumOfProd},this.value,${product.unitCost})"></input>
-                        <div class="text-nowrap"><span class="fw-bold">Subtotal: </span> ${product.currency}<span id="subTotal-${strNumOfProd}"> ${product.unitCost * product.count}<span></div> 
+                        <input type="number" id="input-${numOfProd}" class="w-50 form-control small-width mb-3" min="1" oninput="this.value = Math.abs(this.value)" value="${product.count}" onchange="subtotalCalculator(${numOfProd},this.value,${product.unitCost})"></input>
+                        <div class="text-nowrap"><span class="fw-bold">Subtotal: </span> ${product.currency}<span id="subTotal-${numOfProd}"> ${product.unitCost * product.count}<span></div> 
                     </div>
                 </div>
 
-                <div class="col col-sm-1">
+                <div class="col-1">
                     <div><button type="button" class="btn" aria-label="Close" onclick="deleteFromCart(${numOfProd})"><i class="h3 bi bi-trash3 h"></i></button></div>
                 </div>
 
@@ -56,8 +56,10 @@ function subtotalCalculator(prodNum,quantity,cost) {
     subTotal_td.innerHTML = newSubTotal;
 
     localCart[prodNum][1] = quantity;
+    cartToAdd[prodNum].count = quantity;
 
     changeCartIcon(localCart);
+    costSubtotal(cartToAdd);
     localStorage.setItem("cart",JSON.stringify(localCart));
 }
 
@@ -69,7 +71,7 @@ function deleteFromCart(index) {
     localCart.splice(index,1);
     cartToAdd.splice(index,1);
     
-    console.log(localCart)
+    costSubtotal(cartToAdd);
     changeCartIcon(localCart);
     localStorage.setItem("cart",JSON.stringify(localCart));
     addCartProducts(cartToAdd);
@@ -89,7 +91,7 @@ document.addEventListener("DOMContentLoaded", async ()=>{
         const prod_url = PRODUCT_INFO_URL + prodarr[0] + EXT_TYPE;
         let cartProd = await jsonData(prod_url);
         if (cartProd.status === "ok") {
-            prod = cartProd.data
+            prod = cartProd.data;
         }
             
         let itemToAdd = {
@@ -102,9 +104,84 @@ document.addEventListener("DOMContentLoaded", async ()=>{
 
         }
         
-        cartToAdd.push(itemToAdd)    
+        cartToAdd.push(itemToAdd);    
     }
 
-    addCartProducts(cartToAdd)
+    costSubtotal(cartToAdd);
+    addCartProducts(cartToAdd);
+
+    for(let element of shipping) { 
+        element.addEventListener("click", () =>{
+            costSubtotal(cartToAdd);
+        });
+    }
 })
+
+
+// Total calculation 
+
+function costSubtotal(itemsArray) {
+
+    // subtotal part
+    let totalSub = 0;
+    let USDval = 40; 
+    for(let item of itemsArray) {
+        const {unitCost, currency, count} = item;
+        if(currency === "USD") {
+            totalSub += unitCost * count;
+        } 
+        else {
+            totalSub += unitCost * count / USDval;
+        }
+    }
+    cost_div_items[0].innerHTML = Math.round(totalSub * 100) / 100;
+
+    //shipment
+
+    let shipmentValue = 0;
+    for(let element of shipping) { 
+        if(element.checked) {
+            shipmentValue = parseFloat(element.value) * totalSub;
+        }
+    }
+    cost_div_items[1].innerHTML = Math.round(shipmentValue * 100) / 100;
+    cost_div_items[2].innerHTML =  Math.round((shipmentValue + totalSub) * 100) / 100;
+}
+
+
+// Form controls
+
+const TBancaria = document.querySelector("#TBancaria");
+const tarjeta = document.querySelector("#tarjeta");
+const credit_card_input = document.querySelectorAll(".credit-card");
+const numCuenta_input = document.querySelector("#numCuenta");
+const pay_method_span = document.querySelector("#pay-method-span");
+
+
+TBancaria.addEventListener("click", ()=> {
+
+    numCuenta_input.disabled = false;
+
+    for(let input of credit_card_input) {
+        input.disabled = true;
+    }
+    pay_method_span.innerHTML = "Transferencia bancaria";
+})
+
+tarjeta.addEventListener("click", ()=> {
+    for(let input of credit_card_input) {
+        input.disabled = false;
+    }
+
+    numCuenta_input.disabled = true;
+    pay_method_span.innerHTML = "Tarjeta de Crédito";
+})
+
+
+// form validation 
+
+function formValidation() {
+    
+}
+
 

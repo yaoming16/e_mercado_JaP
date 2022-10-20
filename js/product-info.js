@@ -158,9 +158,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 //add to cart and buy buttons
 
-function cartBtnFunction() {
-
-
+function addProdToLS() {
     // if the cart already has a product in it, we will get the cart info from the local storage and save it on cart (empty string)
     // Otherwise, we will add the product on screen to the cart (empty string) and, after that, store it in the local storage
     let cart = [];
@@ -195,13 +193,18 @@ function cartBtnFunction() {
     }
     changeCartIcon(cart);
 
+}
+
+function cartBtnFunction() {
+
+    addProdToLS();
     //Next line is to show the alert to the user when a product is added to the cart 
     new bootstrap.Toast(document.querySelector("#toast-div")).show();
 
 };
 
 function buyBtnFunction() {
-    cartBtnFunction();
+    addProdToLS();
     window.location = "cart.html";
 };
 
