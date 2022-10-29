@@ -17,13 +17,11 @@ function addCartProducts(array) {
       <div class="col-4 col-lg-2" style="">
         <img class="w-100 cursor-active" src="${product.image}" onClick="setProdID(${product.id})">
       </div>
-    
       <div class="col-8 col-lg-10 row row-cols-2 ">
         <div class="col-11 d-flex flex-column justify-content-around">
           <div>
             <p class="h3  ">${product.name}</p>
           </div>
-    
           <div>
             <p class="text-nowrap">Precio: <span>${product.currency} ${product.unitCost}</span></p>
           </div>
@@ -105,7 +103,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       id: prod.id,
       name: prod.name,
       count: prodarr[1],
-      unitCost: prod.currency === 'USD' ? prod.cost : Math.round(prod.cost / 40),
+      unitCost: prod.currency === 'USD' ? prod.cost : Math.round(prod.cost / 40), 
       currency: 'USD',
       image: prod.images[0]
 
@@ -147,8 +145,8 @@ function costSubtotal() {
       shipmentValue = parseFloat(element.value) * totalSub;
     }
   }
-  cost_div_items[1].innerHTML = roundTwoDecimals(shipmentValue)
-  cost_div_items[2].innerHTML = roundTwoDecimals(shipmentValue + totalSub)
+  cost_div_items[1].innerHTML = roundTwoDecimals(shipmentValue);
+  cost_div_items[2].innerHTML = roundTwoDecimals(shipmentValue + totalSub);
 }
 
 
@@ -165,6 +163,7 @@ TBancaria.addEventListener("click", () => {
 
   for (let input of credit_card_input) {
     input.disabled = true;
+    input.value = '';
   }
   pay_method_span.innerHTML = "Transferencia bancaria";
   pay_method_span.classList.remove("text-danger");
@@ -176,6 +175,7 @@ tarjeta.addEventListener("click", () => {
   }
 
   numCuenta_input.disabled = true;
+  numCuenta_input.value = '';
   pay_method_span.innerHTML = "Tarjeta de Crédito";
   pay_method_span.classList.remove("text-danger");
 })
@@ -196,6 +196,13 @@ document.getElementById('buyBtn').addEventListener('click', () => {
   if (!form2.checkValidity()) {
     form2.classList.add('was-validated');
     pay_method_span.classList.add("text-danger");
+    document.getElementById("saveModalBtn").addEventListener('click', () => {
+      if(form2.checkValidity()) {
+        pay_method_span.classList.remove("text-danger");
+      } else {
+        pay_method_span.classList.add("text-danger");  
+      }
+    })
   }
   if (form1.checkValidity() && form2.checkValidity()) {
     alert_div.innerHTML = `
