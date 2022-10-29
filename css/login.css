@@ -23,13 +23,13 @@ form {
     width: 100%;
     border: none;
     max-width: 700px;
-    margin: auto auto ;
+    margin: auto auto;
 }
 
 form label {
     margin: 2rem 0 6px 0;
     font-size: 1.5rem;
-    
+
 }
 
 form input {
@@ -58,7 +58,7 @@ form input {
 
 #login-img {
     max-width: 80%;
-    
+
 }
 
 #google-button {
@@ -72,10 +72,8 @@ form input {
     font-size: 1rem;
     color: red;
     margin-top: 0.3rem;
-  }
-  
-  .alert-input {
+}
+
+.alert-input {
     border: 1px solid red;
-  }
-
-
+}

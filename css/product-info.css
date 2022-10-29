@@ -1,0 +1,51 @@
+/* product-info */
+
+#carousel,
+#carousel-relatedprod {
+    max-width: 800px;
+    display: block;
+    margin: auto auto;
+    
+}
+
+#submit {
+    margin: auto auto;
+    display: block;
+
+}
+
+.rel-prod-name {
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-weight: 400 !important;
+    font-size: 2rem;
+    background-color: rgb(244, 244, 244);
+
+}
+
+.carousel h5 {
+    margin-bottom: 0;
+    font-size: min(5vw, 2rem);
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    background-color: black;
+    border-radius: 50px;
+    width: 25%;
+    height: 2rem;
+
+}
+
+.carousel-indicators {
+    margin: auto auto;
+    width: 30%;
+    background-color: rgb(0, 0, 0, 15%);
+    border-radius: 25px;
+
+}
+
+#btn-div {
+    z-index: 1;
+
+}

@@ -9,68 +9,43 @@ const EXT_TYPE = ".json";
 
 const cart_Icon = document.querySelector("#cart-icon");
 
-let showSpinner = function(){
+let showSpinner = function () {
   document.getElementById("spinner-wrapper").style.display = "block";
 }
 
-let hideSpinner = function(){
+let hideSpinner = function () {
   document.getElementById("spinner-wrapper").style.display = "none";
-}
-
-let getJSONData = function(url){
-    let result = {};
-    showSpinner();
-    return fetch(url)
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }else{
-        throw Error(response.statusText);
-      }
-    })
-    .then(function(response) {
-          result.status = 'ok';
-          result.data = response;
-          hideSpinner();
-          return result;
-    })
-    .catch(function(error) {
-        result.status = 'error';
-        result.data = error;
-        hideSpinner();
-        return result;
-    });
 }
 
 // function to return an array with the date of each product 
 async function jsonData(url) {
   const result = {};
   try {
-      const response = await fetch(url);
-      if (response.ok) {
-          result.data = await response.json();
-          result.status = "ok";
-      } else {
-          throw Error(response.statusText);    
-      }
-  } 
+    const response = await fetch(url);
+    if (response.ok) {
+      result.data = await response.json();
+      result.status = "ok";
+    } else {
+      throw Error(response.statusText);
+    }
+  }
   catch (error) {
-      result.status = 'error';
-      result.data = error;
+    result.status = 'error';
+    result.data = error;
   }
   return result;
 }
 
 // Set User email when page is loaded
-window.addEventListener("load", function() {
-  if (localStorage.getItem("emailUsusario")){
-      let email_location  = document.getElementById("user-email");
-      email_location.innerHTML = localStorage.getItem('emailUsusario');
+window.addEventListener("load", function () {
+  if (localStorage.getItem("emailUsusario")) {
+    let email_location = document.getElementById("user-email");
+    email_location.innerHTML = localStorage.getItem('emailUsusario');
   } else {
-      window.location.href = "login.html";
+    window.location.href = "login.html";
   }
 
-}) 
+})
 
 
 // set product id 
@@ -90,29 +65,41 @@ async function setLocalCart() {
     let cart = {};
     let response = await jsonData(cart_url);
     if (response.status === "ok") {
-      cart = response.data; 
+      cart = response.data;
     }
 
     let cartToSave = [];
     for (let prod of cart.articles) {
-      cartToSave.push([prod.id,prod.count])
+      cartToSave.push([prod.id, prod.count])
     }
 
     changeCartIcon(cartToSave);
     localStorage.setItem("cart", JSON.stringify(cartToSave));
 
-  } 
+  }
 }
 
 // function to change value of the cart icon. As argument gets the an array with the items. 
 function changeCartIcon(array) {
   let amountProd = 0;
-  for(element of array) {
+  for (element of array) {
     amountProd += element[1];
   }
   cart_Icon.setAttribute("value", amountProd);
 }
 
+// function so inputs don't accept negative numbers
+function noNegativeNumberInput (input) {
+  input.value = Math.abs(input.value);
+}
+
+// round two decimals function
+function roundTwoDecimals(valueToRound) {
+  return Math.round(valueToRound * 100 ) / 100;
+}
+
 setLocalCart();
 changeCartIcon(JSON.parse(localStorage.getItem("cart")));
+
+
 

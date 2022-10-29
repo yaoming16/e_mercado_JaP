@@ -81,9 +81,6 @@ nav a {
   }
 }
 
-
-
-
 .jumbotron p:last-child {
   margin-bottom: 0;
 }
@@ -227,10 +224,11 @@ a.custom-card:hover {
 
 
 
-/* Products */
+/* Products and categories style*/
 
-.title, .sub-title {
-  text-align: center;  
+.title,
+.sub-title {
+  text-align: center;
 }
 
 .title {
@@ -250,14 +248,14 @@ a.custom-card:hover {
   background-color: rgb(243, 243, 243);
   width: 100%;
   margin: 0 0;
-  padding: 1rem  0.5rem 1rem 1rem;
+  padding: 1rem 0.5rem 1rem 1rem;
   border: solid 1px gray;
   border-bottom: none;
 
 }
 
 .product-div:last-of-type {
-border-bottom: solid 1px gray;
+  border-bottom: solid 1px gray;
 
 }
 
@@ -290,14 +288,15 @@ border-bottom: solid 1px gray;
   .product-div {
     flex-wrap: wrap;
     flex-direction: column;
-    
-  }   
-  
+
+  }
+
   .sold-amount {
     text-align: left;
   }
 
-  .product-name-div, .sold-amount{
+  .product-name-div,
+  .sold-amount {
     width: 100%;
     margin-left: 0;
     margin-top: 1rem;
@@ -307,7 +306,7 @@ border-bottom: solid 1px gray;
     width: 100%;
     max-width: 100%;
     display: block;
-    
+
   }
 }
 
@@ -325,67 +324,19 @@ border-bottom: solid 1px gray;
 }
 
 
-/* product-info */
+/** Cart icon**/
 
-#carousel, #carousel-relatedprod{
-  max-width: 800px;
-  display: block;
-  margin: auto auto;
-}
-
-
-
-
-#submit {
-  margin: auto auto;
-  display: block;
-}
-
-.rel-prod-name {
-  text-align: center;
-  color:rgb(0, 0, 0);
-  font-weight: 400 !important;
-  font-size: 2rem;
-  background-color: rgb(244, 244, 244);
- 
-}
-
-.carousel h5{
-  margin-bottom: 0 ;
-  font-size: min(5vw,2rem);
-}
-
-.carousel-control-next-icon, .carousel-control-prev-icon {
-  background-color: black;
-  border-radius: 50px;
-  width: 25%;
-  height: 2rem;
-}
-
-.carousel-indicators {
-  margin: auto auto;
-  width: 30%;
-  background-color: rgb(0, 0, 0, 15%);
-  border-radius: 25px;
-}
-
-#btn-div {
-  z-index: 1;
-}
-
-/** Cart icon**/ 
-
-.bi-cart3:after{
-  content:attr(value);
-  font-size:15px;
+.bi-cart3:after {
+  content: attr(value);
+  font-size: 15px;
   color: #fff;
   background: #343A40;
-  border-radius:50%;
+  border-radius: 50%;
   padding: 0 5px;
-  position:relative;
-  left:-8px;
-  top:-8px;
-  opacity:0.9;
+  position: relative;
+  left: -8px;
+  top: -8px;
+  opacity: 0.9;
 }
 
 .bi-cart3 {
@@ -398,4 +349,3 @@ border-bottom: solid 1px gray;
     width: 100% !important;
   }
 }
-

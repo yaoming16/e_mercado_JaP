@@ -10,6 +10,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link href="css/cart.css" rel="stylesheet">
 </head>
 
 <body>
@@ -31,21 +32,23 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item  dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="user-email" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              
+            <a class="nav-link dropdown-toggle" href="#" id="user-email" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+
             </a>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="user-email">
               <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
               <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
-              <li><a class="dropdown-item" href="login.html" onclick="localStorage.removeItem('emailUsusario')">Cerrar Sesión</a></li>
+              <li><a class="dropdown-item" href="login.html" onclick="localStorage.removeItem('emailUsusario')">Cerrar
+                  Sesión</a></li>
             </ul>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="cart.html"><i  id="cart-icon" class="bi bi-cart3 h4" value="0"></i></a>
+            <a class="nav-link" href="cart.html"><i id="cart-icon" class="bi bi-cart3 h4" value="0"></i></a>
           </li>
         </ul>
-       
+
       </div>
     </div>
 
@@ -62,180 +65,203 @@
       <h3 class="display-6 mt-3 mb-4 text-center">Artículos a comprar</h3>
 
       <div id="prod-table" class="">
-            
+
       </div>
 
-      <form class="mt-4 needs-validation on ">
+      <form class="mt-4 needs-validation" id="form1">
 
         <div class="row row-cols-1">
           <fieldset class="col">
             <legend class="mb-3 h4">Tipo de envío</legend>
-  
+
             <div class="form-check mb-2">
               <label for="premium">Premium 2 a 5 días (15%)</label>
               <input id="premium" name="shipping" type="radio" class="form-check-input" value="0.15" required>
             </div>
-  
+
             <div class="form-check mb-2">
               <label for="Express">Express 5 a 8 días (7%)</label>
               <input id="Express" name="shipping" type="radio" class="form-check-input" value="0.07">
             </div>
-  
+
             <div class="form-check mb-4">
               <label for="Standard">Standard 12 a 15 días (5%)</label>
               <input id="Standard" name="shipping" type="radio" class="form-check-input" value="0.05">
+              <div class="invalid-feedback">
+                Seleccione un método de envío.
+              </div>
             </div>
-     
+
           </fieldset>
-  
+
           <fieldset class="col">
-  
+
             <legend class="mb-3 h4">Dirección de envío</legend>
-  
+
             <div class="row row-cols-2">
               <div>
                 <label for="street" class="form-label col">Calle</label>
                 <input type="text" id="street" name="street" class="form-control mb-3" required>
-                
+                <div class="invalid-feedback">
+                  Ingrese una calle.
+                </div>
               </div>
-              
+
               <div>
                 <label for="number" class="form-label col">Número</label>
-                <input type="text" id="number" name="number" class="form-control mb-3" required>
-
+                <input type="number" id="number" name="number" class="form-control mb-3 input-no-arrow" oninput="noNegativeNumberInput (this)" required>
+                <div class="invalid-feedback">
+                  Ingrese el número de puerta.
+                </div>
               </div>
-              
+
               <div>
                 <label for="corner" class="form-label col">Esquína</label>
                 <input type="text" id="corner" name="corner" class="form-control mb-3" required>
+                <div class="invalid-feedback">
+                  Ingrese la esquina.
+                </div>
               </div>
-          
+
             </div>
-            
+
           </fieldset>
         </div>
-        
-      
 
-        <hr>
+      </form>
 
-        <div id="cost-div" class="mt-3 mb-5">
 
-          <h3 class="h4 mb-3">Costos</h3>
 
-          <div id="subtotal-div" class="d-flex flex-row justify-content-between border border-bottom-0">
-            <p>Subtotal</p>
-            <p>
-              USD
-              <span class="cost-div-item ms-2"></span>
-            </p>
-          </div>
+      <hr>
 
-          <div id="shipping-div" class="d-flex flex-row justify-content-between border border-bottom-0">
-            <p class="">Costo de envío</p>
-            <p>
-              USD
-              <span class="cost-div-item ms-2"></span>
-            </p>
-          </div>
+      <div id="cost-div" class="mt-3 mb-5">
 
-          <div id="total-div" class="d-flex flex-row justify-content-between border">
-            <p>Total</p>
-            <p class="fw-bold">
-              USD
-              <span class="cost-div-item ms-2"></span>
-            </p>
-          </div>
+        <h3 class="h4 mb-3">Costos</h3>
+
+        <div id="subtotal-div" class="d-flex flex-row justify-content-between border border-bottom-0">
+          <p>Subtotal</p>
+          <p>
+            USD
+            <span class="cost-div-item ms-2"></span>
+          </p>
         </div>
 
-        <hr>
+        <div id="shipping-div" class="d-flex flex-row justify-content-between border border-bottom-0">
+          <p class="">Costo de envío</p>
+          <p>
+            USD
+            <span class="cost-div-item ms-2"></span>
+          </p>
+        </div>
 
-        <div id="payment-method-div" class="mt-4">
-          <h3>Forma de pago</h3>
+        <div id="total-div" class="d-flex flex-row justify-content-between border">
+          <p>Total</p>
+          <p class="fw-bold">
+            USD
+            <span class="cost-div-item ms-2"></span>
+          </p>
+        </div>
+      </div>
 
-          
-          <div id="modal-div" class="mt-4">
-    
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pay-modal">
-              Seleccionar
-            </button>
+      <hr>
 
-            <div class="modal fade" id="pay-modal" tabindex="-1" aria-labelledby="pay-modal-label" aria-hidden="true">
-              <div class="modal-dialog">
+      <div id="payment-method-div" class="mt-4">
+        <h3>Forma de pago</h3>
 
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="pay-modal-label">Forma de pago</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
 
-                  <div class="modal-body">
-                    
+        <div id="modal-div" class="mt-4">
+
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pay-modal">
+            Seleccionar
+          </button>
+
+          <div class="modal fade" id="pay-modal" tabindex="-1" aria-labelledby="pay-modal-label" aria-hidden="true">
+            <div class="modal-dialog">
+
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="pay-modal-label">Forma de pago</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                  <form action="#" id="form2" class="needs-validation">
                     <div class="d-flex flex-column">
                       <div>
-                        <input type="radio" class="form-check-input" name="pay-method"  value="TBancaria" id="TBancaria">
+                        <input type="radio" class="form-check-input" name="pay-method" value="TBancaria" id="TBancaria"
+                          required>
                         <label for="TBancaria" class="form-check-label">Transferencia bancaria</label>
                       </div>
-                  
                       <div>
-                        <input type="radio" class="form-check-input" name="pay-method" value="tarjeta" id="tarjeta">
+                        <input type="radio" class="form-check-input" name="pay-method" value="tarjeta" id="tarjeta"
+                          required>
                         <label for="tarjeta" class="form-check-label">Tarjeta de crédito</label>
+                        <div class="invalid-feedback">
+                          Por favor seleccione el método de pago.
+                        </div>
                       </div>
-
                       <hr>
-
                       <div class="row row-cols-2">
                         <div class="mb-3 col">
                           <label for="numTarjeta" class="form-label">Número de tarjeta</label>
-                          <input type="number" class="form-control credit-card" id="numTarjeta" name="numTarjeta">
+                          <input type="number" class="form-control credit-card input-no-arrow" id="numTarjeta" name="numTarjeta"
+                            display="none"  oninput="noNegativeNumberInput (this)"  required>
+                          <div class="invalid-feedback">
+                            Ingrese el número de tarjeta.
+                          </div>
                         </div>
-
                         <div class="mb-3 col">
                           <label for="codSeg" class="form-label">Email address</label>
-                          <input type="number" class="form-control credit-card" id="codSeg">
+                          <input type="email" class="form-control credit-card" id="codSeg" required>
+                          <div class="invalid-feedback">
+                            Ingrese su dirección de email.
+                          </div>
                         </div>
-
                         <div class="mb-3 col">
                           <label for="vencimiento" class="form-label">Vencimiento</label>
-                          <input type="date" class="form-control credit-card" id="vencimiento">
+                          <input type="month" class="form-control credit-card" id="vencimiento" required>
+                          <div class="invalid-feedback">
+                            Ingrese el vencimiento de su tarjeta.
+                          </div>
                         </div>
-
                       </div>
 
                       <hr>
 
                       <div class="mb-3 col w-50">
                         <label for="numCuenta" class="form-label">Número de cuenta</label>
-                        <input type="number" class="form-control" id="numCuenta">
+                        <input type="number" class="form-control input-no-arrow" id="numCuenta" oninput="noNegativeNumberInput (this)" required>
+                        <div class="invalid-feedback" >
+                          Ingrese el número de cuenta bancaria.
+                        </div>
                       </div>
 
                     </div>
-                    
-                  </div>
 
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-                  </div>
+                  </form>
+
                 </div>
 
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                </div>
               </div>
+
             </div>
-            <span class="ms-2 ms-sm-4 text-nowrap" id="pay-method-span">No se ha seleccionado</span>
-            
           </div>
+          <span class="ms-2 ms-sm-4 text-nowrap" id="pay-method-span">No se ha seleccionado</span>
 
         </div>
 
-        <button type="submit" class="btn btn-primary mt-5" id="butBtn">
-          Finalizar compra
-        </button>
+      </div>
 
-      </form>
-
-
+      <div id="alert-div"></div>
+      <button type="submit" class="btn btn-primary mt-5" id="buyBtn">
+        Finalizar compra
+      </button>
     </div>
 
-    
 
 
   </main>
