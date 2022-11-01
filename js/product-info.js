@@ -86,7 +86,7 @@ function addStars(score) {
 function addComments(data) {
   contentToAppend = "";
 
-  for (i of data) {
+  for (let i of data) {
 
     contentToAppend += `
     <div class="card text-bg-primary mb-3">
@@ -120,6 +120,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   // add new comment
   submit.addEventListener("click", function () {
     if (text_area.value.trim() !== "") {
+      let userData = JSON.parse(localStorage.getItem('userData'));
       let date = new Date();
       let currentDay = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
       let currentTime = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
@@ -127,7 +128,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         product: localStorage.getItem("prodID"),
         score: parseInt(score.value),
         description: text_area.value,
-        user: localStorage.getItem("emailUsusario"),
+        user: userData.firstName.trim() !== "" ? userData.firstName : userData.email,
         dateTime: currentDay + " " + currentTime
       }
       text_area.value = "";

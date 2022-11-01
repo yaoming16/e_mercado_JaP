@@ -36,17 +36,11 @@ async function jsonData(url) {
   return result;
 }
 
-// Set User email when page is loaded
-window.addEventListener("load", function () {
-  if (localStorage.getItem("emailUsusario")) {
-    let email_location = document.getElementById("user-email");
-    email_location.innerHTML = localStorage.getItem('emailUsusario');
-  } else {
-    window.location.href = "login.html";
-  }
+// redirect user
 
-})
-
+function redirect(url) {
+  window.location.href = url;
+}
 
 // set product id 
 
@@ -89,17 +83,51 @@ function changeCartIcon(array) {
 }
 
 // function so inputs don't accept negative numbers
-function noNegativeNumberInput (input) {
+function noNegativeNumberInput(input) {
   input.value = Math.abs(input.value);
 }
 
 // round two decimals function
 function roundTwoDecimals(valueToRound) {
-  return Math.round(valueToRound * 100 ) / 100;
+  return Math.round(valueToRound * 100) / 100;
 }
 
-setLocalCart();
-changeCartIcon(JSON.parse(localStorage.getItem("cart")));
+//function to create an object with the info of the user and save it on local storage
+
+function saveUserData(info) {
+  let userData = {
+    firstName: info[0],
+    secondName: info[1],
+    firstSurname: info[2],
+    secondSurname: info[3],
+    email: info[4],
+    telephone: info[5]
+  }
+  localStorage.setItem('userData',JSON.stringify(userData));
+}
+
+
+if (!document.URL.includes("login.html")) {
+
+  // Set User email when page is loaded
+  if(localStorage.getItem('userData')) {
+    window.addEventListener("load", function () {
+      let email_location = document.getElementById("user-email");
+      email_location.innerHTML = JSON.parse(localStorage.getItem('userData')).email;
+  
+    })
+
+    setLocalCart();
+    changeCartIcon(JSON.parse(localStorage.getItem("cart")));
+    
+  } else {
+    redirect("login.html");
+  }
+  
+} 
+
+
+
 
 
 

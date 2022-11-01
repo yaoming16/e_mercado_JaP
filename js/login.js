@@ -3,27 +3,24 @@
 const submit = document.getElementById("submit");
 const password = document.getElementById("password");
 const alert_p = document.getElementsByClassName("alert-p");
-const form = document.getElementsByClassName("form");
+const email = document.getElementById("email");
+
 
 // redirect if already loged in 
-
-window.addEventListener("load", function () {
-  if (localStorage.getItem("emailUsusario")) {
-    window.location.href = "index.html";
-  }
-})
+if(localStorage.getItem('userData')) {
+  redirect('index.html')
+}
 
 
 submit.addEventListener("click", function () {
+  
 
   if (email.value.trim() !== "" && password.value.trim() !== "") {
 
-    form.onsubmit = "return true";
-
     // Local Storage 
-    localStorage.setItem('emailUsusario', email.value);
+    saveUserData(["","","","",email.value,""])
 
-    redirect();
+    redirect("index.html");
 
   }
   if (email.value.trim() === "") {
@@ -47,24 +44,17 @@ submit.addEventListener("click", function () {
 })
 
 
-
-
 // Google log in 
 
-function redirect() {
-  window.location.href = "index.html";
-}
-
-
 var googleButton = document.getElementById('google-button');
-
 
 
 // function to get response
 function handleCredentialResponse(response) {
   const responsePayload = decodeJwtResponse(response.credential);
-  localStorage.setItem('emailUsusario', responsePayload.email);
-  redirect();
+
+  saveUserData(["","","","",responsePayload.email,""])
+  redirect("index.html");
 
   // img.src = responsePayload.picture;
   // getName.innerHTML = responsePayload.name;
@@ -105,6 +95,10 @@ function decodeJwtResponse(token) {
     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
   return JSON.parse(jsonPayload);
+}
+
+function redirect(url) {
+  window.location.href = url;
 }
 
 
