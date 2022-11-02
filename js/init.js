@@ -76,7 +76,8 @@ async function setLocalCart() {
 // function to change value of the cart icon. As argument gets the an array with the items. 
 function changeCartIcon(array) {
   let amountProd = 0;
-  for (element of array) {
+  for (let element of array) {
+    console.log(array)
     amountProd += element[1];
   }
   cart_Icon.setAttribute("value", amountProd);
@@ -104,6 +105,12 @@ function saveUserData(info) {
     telephone: info[5]
   }
   localStorage.setItem('userData',JSON.stringify(userData));
+}
+
+//function to delete local storage data
+function deleteLSData() {
+  localStorage.removeItem('userData');
+  localStorage.removeItem('cart');
 }
 
 

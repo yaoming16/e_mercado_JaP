@@ -15,15 +15,16 @@ if(localStorage.getItem('userData')) {
 submit.addEventListener("click", function () {
   
 
-  if (email.value.trim() !== "" && password.value.trim() !== "") {
+  if (email.checkValidity()  && password.value.trim() !== "") {
 
     // Local Storage 
     saveUserData(["","","","",email.value,""])
+    localStorage.setItem('userImg','./img/img_perfil.png');
 
     redirect("index.html");
 
   }
-  if (email.value.trim() === "") {
+  if (!email.checkValidity()) {
     email.classList = "alert-input";
     alert_p[0].innerHTML = "Ingresa tu e-mail "
 
@@ -32,7 +33,7 @@ submit.addEventListener("click", function () {
     alert_p[0].innerHTML = ""
   }
 
-  if (password.value.trim() === "") {
+  if (!password.checkValidity()) {
     password.classList = "alert-input";
     alert_p[1].innerHTML = "Ingresa tu constraseña "
 
@@ -53,7 +54,8 @@ var googleButton = document.getElementById('google-button');
 function handleCredentialResponse(response) {
   const responsePayload = decodeJwtResponse(response.credential);
 
-  saveUserData(["","","","",responsePayload.email,""])
+  saveUserData(["","","","",responsePayload.email,""]);
+  localStorage.setItem('userImg','./img/img_perfil.png');
   redirect("index.html");
 
   // img.src = responsePayload.picture;
