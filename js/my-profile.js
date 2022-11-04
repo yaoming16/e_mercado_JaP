@@ -4,7 +4,9 @@ const imgInput = document.getElementById('user-image-input');
 const userImgTag = document.getElementById('user-img-tag');
 
 let userData = JSON.parse(localStorage.getItem('userData'));
+
 let userDataprops = Object.keys(userData);
+
 
 
 // get an url for the img that the user loads only if the user selects an png or jpg image. 
