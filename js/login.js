@@ -12,11 +12,11 @@ if (localStorage.getItem('userData')) {
 }
 
 
-submit.addEventListener("click", async function () {
+submit.addEventListener("click", function () {
 
+  //only allow the user to log in if the email has a valid format and the password is not empty
   if (email.checkValidity() && password.value.trim() !== "") {
 
-    // Local Storage 
     saveUserData(["", "", "", "", email.value, ""])
     localStorage.setItem('userImg', './img/img_perfil.png');
 
@@ -32,7 +32,7 @@ submit.addEventListener("click", async function () {
     alert_p[0].classList.add('d-none');
   }
 
-  if (!password.checkValidity()) {
+  if (!password.value.trim() !== "") {
     password.classList.add('alert-input');
     animateCSS('#alert2', 'shakeX');
     alert_p[1].classList.remove('d-none');

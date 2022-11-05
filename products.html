@@ -57,47 +57,47 @@
   </nav>
 
   <main class="pb-5">
-    <div class="container">
+    <div class="container p-3">
       <h1 id="title" class="title">Productos</h1>
       <h2 id="sub-title" class="sub-title bold"></h2>
 
       <div class="container">
-        <div class="row">
-          <div class="col text-end">
-            <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
-              <input type="radio" class="btn-check" name="options" id="sortAsc">
-              <label class="btn btn-light" for="sortAsc"><i class="fas fa-sort-amount-up mr-1"> $ </i></label>
-              <input type="radio" class="btn-check" name="options" id="sortDesc">
-              <label class="btn btn-light" for="sortDesc"><i class="fas fa-sort-amount-down mr-1"> $ </i></label>
-              <input type="radio" class="btn-check" name="options" id="sortByCount">
-              <label class="btn btn-light" for="sortByCount"><i class="fas fa-sort-amount-down mr-1"> Rel</i></label>
+        <div class="">
+          <div class="row">
+            <div class="col text-start text-md-end">
+              <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
+                <input type="radio" class="btn-check" name="options" id="sortAsc">
+                <label class="btn btn-light" for="sortAsc"><i class="fas fa-sort-amount-up mr-1"> $ </i></label>
+                <input type="radio" class="btn-check" name="options" id="sortDesc">
+                <label class="btn btn-light" for="sortDesc"><i class="fas fa-sort-amount-down mr-1"> $ </i></label>
+                <input type="radio" class="btn-check" name="options" id="sortByCount">
+                <label class="btn btn-light" for="sortByCount"><i class="fas fa-sort-amount-down mr-1"> Rel</i></label>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="row container">
-          <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
-            <div class="row container p-0 m-0">
-              <div class="col">
-                <p class="font-weight-normal text-end my-2">Precio:</p>
-              </div>
-              <div class="col">
-                <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin" min="0">
-              </div>
-              <div class="col">
-                <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMax" min="0">
-              </div>
-              <div class="col-3 p-0">
-                <div class="btn-group" role="group">
-                  <button class="btn btn-light btn-block" id="rangeFilterCount">Filtrar</button>
-                  <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
-                </div>
-              </div>
-              <div id="search-bar-container">
-                <label for="search" class="search-content">Buscador: </label>
-                <input type="search" name="q" id="search" class="search-content">
-              </div>
+          <div class="row row-cols-1 row-cols-md-3  justify-content-end align-items-center justify-content-center">
+            <div class="col col-md-3 mb-2 mb-md-0">
+              <p class="form-text text-left text-md-end mt-auto mb-auto fs-5 text-nowrap">Filtrar por precio:</p>
             </div>
+            <div class="col col-md-3 mb-2 mb-md-0">
+              <input class="form-control input-no-arrow" type="number" placeholder="min." id="rangeFilterCountMin"
+                min="0">
+            </div>
+            <div class="col col-md-3 mb-4 mb-md-0">
+              <input class="form-control input-no-arrow" type="number" placeholder="máx." id="rangeFilterCountMax"
+                min="0">
+            </div>
+            <div class="btn-group col col-md-3 mb-sm-2 mb-md-0" role="group">
+              <button class="btn btn-secondary btn-block" id="rangeFilterCount">Filtrar</button>
+              <button class="btn btn-light btn-sm" id="clearRangeFilter">Limpiar</button>
+            </div>
+          </div>
+
+          <div class="mt-4 mb-4 row row-cols-1 row-cols-md-2 d-flex justify-content-end align-items-center">
+            <div class="col mb-2 mb-md-0">
+              <p class="text-left text-md-end form-text fs-5 mt-auto mb-auto">Buscador: </p>
+            </div>
+            <div class="col"><input type="search" id="search" class="form-control"></div>
           </div>
         </div>
 
