@@ -7,39 +7,39 @@ const email = document.getElementById("email");
 
 
 // redirect if already loged in 
-if(localStorage.getItem('userData')) {
+if (localStorage.getItem('userData')) {
   redirect('index.html')
 }
 
 
-submit.addEventListener("click", function () {
-  
+submit.addEventListener("click", async function () {
 
-  if (email.checkValidity()  && password.value.trim() !== "") {
+  if (email.checkValidity() && password.value.trim() !== "") {
 
     // Local Storage 
-    saveUserData(["","","","",email.value,""])
-    localStorage.setItem('userImg','./img/img_perfil.png');
+    saveUserData(["", "", "", "", email.value, ""])
+    localStorage.setItem('userImg', './img/img_perfil.png');
 
     redirect("index.html");
 
   }
   if (!email.checkValidity()) {
-    email.classList = "alert-input";
-    alert_p[0].innerHTML = "Ingresa tu e-mail "
-
+    email.classList.add('alert-input');
+    animateCSS('#alert1', 'shakeX');
+    alert_p[0].classList.remove('d-none');
   } else {
     email.classList.remove("alert-input");
-    alert_p[0].innerHTML = ""
+    alert_p[0].classList.add('d-none');
   }
 
   if (!password.checkValidity()) {
-    password.classList = "alert-input";
-    alert_p[1].innerHTML = "Ingresa tu constraseña "
+    password.classList.add('alert-input');
+    animateCSS('#alert2', 'shakeX');
+    alert_p[1].classList.remove('d-none');
 
   } else {
     password.classList.remove("alert-input");
-    alert_p[1].innerHTML = ""
+    alert_p[1].classList.add('d-none');
   }
 
 })
@@ -54,8 +54,8 @@ var googleButton = document.getElementById('google-button');
 function handleCredentialResponse(response) {
   const responsePayload = decodeJwtResponse(response.credential);
 
-  saveUserData(["","","","",responsePayload.email,""]);
-  localStorage.setItem('userImg','./img/img_perfil.png');
+  saveUserData(["", "", "", "", responsePayload.email, ""]);
+  localStorage.setItem('userImg', './img/img_perfil.png');
   redirect("index.html");
 
   // img.src = responsePayload.picture;

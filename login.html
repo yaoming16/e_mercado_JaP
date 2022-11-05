@@ -8,9 +8,10 @@
 
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link href="css/styles.css" rel="stylesheet">
   <link href="css/login.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
   <!-- <meta name="google-signin-client_id" content="86756801876-alsvcgn023eunbf6nunhu2aqgrhvm73b.apps.googleusercontent.com"> -->
 
@@ -19,27 +20,43 @@
 
 <body>
 
-  <main class="mt-5">
+  <main class="mt-5 p-3">
 
-    <form action="" method="" onsubmit="return false" novalidate>
-      <img id="login-img" src="img/login.png" alt="Logo de e-mercado">
+    <div class="container c-div">
+      <div class="card-div">
+        <div class="card border border-secondary border-2 rounded-3 shadow-lg">
+          <img src="img/login.png" class="card-img-top animate__animated animate__fadeInDown animate__slower	"
+            alt="Logo de e-mercado">
+          <div class="card-body">
+            <form action="" method="" class="" onsubmit="return false" novalidate>
 
-      <h1>Inicio de sesión</h1>
+              <h1 class="text-center h1 mb-3">Inicio de sesión</h1>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="Email" required>
-      <p class="alert-p"></p>
+              <label for="email"
+                class="form-text text-center mb-2 fs-3 animate__animated animate__fadeInLeft animate__slower	">Email</label>
+              <input type="email" id="email" name="email" placeholder="Email" class="mb-2 form-control " required>
+              <p class="alert-p d-none animate__animated" id="alert1">Ingresa tu email</p>
 
-      <label for="password">Contraseña</label>
-      <input type="password" id="password" name="password" placeholder="Contraseña" required>
-      <p class="alert-p"></p>
+              <label for="password"
+                class="form-text text-center mb-2 fs-3 animate__animated animate__fadeInLeft animate__slower	">Contraseña</label>
+              <input type="password" id="password" name="password" placeholder="Contraseña" class="form-control"
+                required>
+              <p class="alert-p d-none animate__animated" id="alert2">Ingresa tu Contraseña</p>
+
+              <button type="submit" id="submit"
+                class="d-flex mt-4 mb-4 ms-auto me-auto btn btn-primary w-50 d-flex justify-content-center">Ingresar</button>
+              <hr>
+              <div id="google-button" class="w-50 ms-auto me-auto"></div>
 
 
-      <div id="google-button"></div>
 
-      <button type="submit" id="submit">Ingresar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    </form>
+
 
 
   </main>
@@ -55,6 +72,8 @@
     </div>
   </footer>
 
+  <!-- <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script> -->
   <script src="./js/init.js"></script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="js/login.js"></script>

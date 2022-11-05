@@ -16,53 +16,17 @@ h1 {
     font-size: 2rem;
 }
 
-form {
+.c-div {
+    width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    border: none;
+    justify-content: center;
+}
+
+.card-div {
     max-width: 700px;
     margin: auto auto;
-}
-
-form label {
-    margin: 2rem 0 6px 0;
-    font-size: 1.5rem;
-
-}
-
-form input {
-    width: 50%;
-    border-radius: 10px;
-    height: 2.5rem;
-    padding: 2px 0 2px 10px;
-    border: solid 1px gray;
-
-}
-
-#submit {
-    margin: 1rem 0;
-    width: 25%;
-    min-width: 5rem;
-    height: 3rem;
-    border-radius: 25px;
-    background-color: rgb(184, 204, 223);
-    border: none;
-}
-
-#submit:hover {
-    background-color: rgb(212, 227, 241);
-
-}
-
-#login-img {
-    max-width: 80%;
-
-}
-
-#google-button {
-    margin: 1rem 0 0 0;
 }
 
 
@@ -77,3 +41,5 @@ form input {
 .alert-input {
     border: 1px solid red;
 }
+
+
