@@ -17,7 +17,7 @@ submit.addEventListener("click", function () {
   //only allow the user to log in if the email has a valid format and the password is not empty
   if (email.checkValidity() && password.value.trim() !== "") {
 
-    saveUserData(["", "", "", "", email.value, ""])
+    saveUserData(["", "", "", "", email.value, ""]);
     localStorage.setItem('userImg', './img/img_perfil.png');
 
     redirect("index.html");
