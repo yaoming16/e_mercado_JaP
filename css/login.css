@@ -42,4 +42,6 @@ h1 {
     border: 1px solid red;
 }
 
-
+#google-button > div:first-of-type {
+    width: 100%;
+}
