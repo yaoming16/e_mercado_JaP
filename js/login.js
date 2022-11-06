@@ -87,6 +87,7 @@ window.onload = function () {
   // important for auto login
   google.accounts.id.prompt();
 }
+document.getElementsByTagName('iframe')[0].classList = '';
 
 
 // function to decode the response.credential
@@ -99,7 +100,7 @@ function decodeJwtResponse(token) {
   }).join(''));
   return JSON.parse(jsonPayload);
 }
-
+gsi_640057_943996
 function redirect(url) {
   window.location.href = url;
 }
