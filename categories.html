@@ -11,6 +11,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link href="css/categories.css" rel="stylesheet">
 </head>
 
 <body>
@@ -62,7 +63,7 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="col text-end">
+          <div class="col text-start text-md-end">
             <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
               <input type="radio" class="btn-check" name="options" id="sortAsc">
               <label class="btn btn-light" for="sortAsc">A-Z</label>
@@ -73,25 +74,19 @@
             </div>
           </div>
         </div>
-        <div class="row container">
-          <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
-            <div class="row container p-0 m-0">
-              <div class="col">
-                <p class="font-weight-normal text-end my-2">Cant.</p>
-              </div>
-              <div class="col">
-                <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin">
-              </div>
-              <div class="col">
-                <input class="form-control" type="number" placeholder="máx." id="rangeFilterCountMax">
-              </div>
-              <div class="col-3 p-0 ">
-                <div class="btn-group" role="group">
-                  <button class="btn btn-light btn-block" id="rangeFilterCount">Filtrar</button>
-                  <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
-                </div>
-              </div>
-            </div>
+        <div class="row row-cols-1 row-cols-md-3  justify-content-end align-items-center justify-content-center mb-4">
+          <div class="col col-md-3 mb-2 mb-md-0">
+            <p class="form-text text-left text-md-end mt-auto mb-auto fs-5 text-nowrap">Cant.</p>
+          </div>
+          <div class="col col-md-3 mb-2 mb-md-0">
+            <input class="form-control input-no-arrow" type="number" placeholder="min." id="rangeFilterCountMin">
+          </div>
+          <div class="col col-md-3 mb-4 mb-md-0">
+            <input class="form-control input-no-arrow" type="number" placeholder="máx." id="rangeFilterCountMax">
+          </div>
+          <div class="btn-group col col-md-3 mb-sm-2 mb-md-0" role="group">
+            <button class="btn btn-secondary btn-block" id="rangeFilterCount">Filtrar</button>
+            <button class="btn btn-light btn-sm" id="clearRangeFilter">Limpiar</button>
           </div>
         </div>
         <div class="row">
