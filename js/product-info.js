@@ -1,7 +1,7 @@
 const prod_title = document.querySelector("#prod-title");
 const prod_info = document.querySelectorAll(".info-p");
 const prod_img = document.querySelector("#img-div");
-const comments = document.querySelector("#comments");
+const comments_div = document.querySelector("#comments");
 const text_area = document.querySelector("#text-area");
 const score = document.querySelector("#score")
 const submit = document.querySelector("#submit");
@@ -15,7 +15,7 @@ const alert_p = document.querySelector("#alert-p")
 const prod_comment_url = PRODUCT_INFO_COMMENTS_URL + localStorage.getItem("prodID") + EXT_TYPE;
 const prod_url = PRODUCT_INFO_URL + localStorage.getItem("prodID") + EXT_TYPE;
 
-// function to add info 
+// function to add the info of the selected product to the page
 function addInfo(data) {
   contentToAppendProd_images = "";
   contentToAppendProd_li = "";
@@ -28,6 +28,7 @@ function addInfo(data) {
   prod_info[2].innerHTML = data.category;
   prod_info[3].innerHTML = data.soldCount;
 
+  //carousel for the images of the selected product
   for (let i = 0; i < data.images.length; i++) {
     contentToAppendProd_images += `
     <div class="carousel-item prodIm-div-Carousel">
@@ -42,10 +43,11 @@ function addInfo(data) {
   prod_img.innerHTML = contentToAppendProd_images;
   carouselProdImg.innerHTML = contentToAppendProd_li;
 
+  // we need to add the active class to the first image so the carousel works properly 
   document.getElementsByClassName("prodIm-div-Carousel")[0].classList.add("active");
   document.getElementsByClassName("prodIm-button-Carousel")[0].classList.add("active");
 
-
+  //carousel for the images of the related products
   for (let i = 0; i < data.relatedProducts.length; i++) {
     contentToAppendRelProd_images += `
     <div class="carousel-item cursor-active relProdIm-div-Carousel"  onclick="setProdID(${data.relatedProducts[i].id})">
@@ -61,12 +63,13 @@ function addInfo(data) {
   carouselRelatedProd_img.innerHTML = contentToAppendRelProd_images;
   carouselRelatedProd_li.innerHTML = contentToAppendRelProd_li;
 
+  // we need to add the active class to the first image so the carousel works properly
   document.getElementsByClassName("relProdIm-div-Carousel")[0].classList.add("active");
   document.getElementsByClassName("relProdIm-button-Carousel")[0].classList.add("active");
 
 }
 
-// Add stars function
+// Function to add up to five starts. Used when a new comment is added
 function addStars(score) {
   stars = "";
   for (let i = 1; i <= score; i++) {
@@ -82,28 +85,28 @@ function addStars(score) {
   return stars;
 }
 
-// Add comments function 
-function addComments(data) {
+// Function that receives an array with the information of the comments that are going to be added
+function addComments(comments) {
   contentToAppend = "";
 
-  for (let i of data) {
+  for (let comment of comments) {
 
     contentToAppend += `
     <div class="card text-bg-primary mb-3">
-      <div class="card-header">${i.user} ${i.dateTime}</div>
+      <div class="card-header">${comment.user} ${comment.dateTime}</div>
       <div class="card-body">
-        <h5 class="card-title">${addStars(i.score)}</h5>
-        <p class="card-text">${i.description}</p>
+        <h5 class="card-title">${addStars(comment.score)}</h5>
+        <p class="card-text">${comment.description}</p>
       </div>
     </div>
     `
   }
 
-  comments.innerHTML = contentToAppend;
+  comments_div.innerHTML = contentToAppend;
 
 }
 
-// load prod info on the page
+// load product info when the page is loaded.
 document.addEventListener("DOMContentLoaded", async function () {
   let prodData = await jsonData(prod_url);
   if (prodData.status === "ok") {
@@ -117,7 +120,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     addComments(commentInfo);
   }
 
-  // add new comment
+  // This event will save the information of the new submited comment in an object and add it to the array with the comments that came from the server. 
   submit.addEventListener("click", function () {
     if (text_area.value.trim() !== "") {
       let userData = JSON.parse(localStorage.getItem('userData'));
@@ -136,6 +139,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       commentInfo.unshift(comentToAdd);
       addComments(commentInfo);
+
+      //if the text area is empty the user will get an animation as feedback 
+    } else {
+      animateCSS('#text-area', 'heartBeat');
     }
 
   })
@@ -174,9 +181,7 @@ function addProdToLocalStorage() {
 }
 
 function cartBtnFunction() {
-
   addProdToLocalStorage();
-
   new bootstrap.Toast(document.querySelector("#toast-div")).show();
 
 };
@@ -184,6 +189,7 @@ function cartBtnFunction() {
 function buyBtnFunction() {
   addProdToLocalStorage();
   window.location = "cart.html";
+
 };
 
 

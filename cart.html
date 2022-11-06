@@ -58,15 +58,10 @@
 
 
   <main>
-    <div class="container">
-
+    <div class="container p-4">
       <h1 class="display-5 mt-3 mb-3 text-center">Carrito de compras</h1>
-
       <h3 class="display-6 mt-3 mb-4 text-center">Artículos a comprar</h3>
-
-      <div id="prod-table" class="">
-
-      </div>
+      <div id="prod-table" class=""></div>
 
       <form class="mt-4 needs-validation" id="form1">
 
@@ -109,7 +104,8 @@
 
               <div>
                 <label for="number" class="form-label col">Número</label>
-                <input type="number" id="number" name="number" class="form-control mb-3 input-no-arrow" oninput="noNegativeNumberInput (this)" required>
+                <input type="number" id="number" name="number" class="form-control mb-3 input-no-arrow"
+                  oninput="noNegativeNumberInput (this)" required>
                 <div class="invalid-feedback">
                   Ingrese el número de puerta.
                 </div>
@@ -175,13 +171,14 @@
             Seleccionar
           </button>
 
-          <div class="modal fade" id="pay-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="pay-modal-label" aria-hidden="true">
+          <div class="modal fade" id="pay-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="pay-modal-label" aria-hidden="true">
             <div class="modal-dialog">
 
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="pay-modal-label">Forma de pago</h5>
-                  
+
                 </div>
 
                 <div class="modal-body">
@@ -205,8 +202,8 @@
                       <div class="row row-cols-2">
                         <div class="mb-3 col">
                           <label for="numTarjeta" class="form-label">Número de tarjeta</label>
-                          <input type="number" class="form-control credit-card input-no-arrow" id="numTarjeta" name="numTarjeta"
-                            display="none"  oninput="noNegativeNumberInput (this)"  required>
+                          <input type="number" class="form-control credit-card input-no-arrow" id="numTarjeta"
+                            name="numTarjeta" display="none" oninput="noNegativeNumberInput (this)" required>
                           <div class="invalid-feedback">
                             Ingrese el número de tarjeta.
                           </div>
@@ -231,8 +228,9 @@
 
                       <div class="mb-3 col w-50">
                         <label for="numCuenta" class="form-label">Número de cuenta</label>
-                        <input type="number" class="form-control input-no-arrow" id="numCuenta" oninput="noNegativeNumberInput (this)" required>
-                        <div class="invalid-feedback" >
+                        <input type="number" class="form-control input-no-arrow" id="numCuenta"
+                          oninput="noNegativeNumberInput (this)" required>
+                        <div class="invalid-feedback">
                           Ingrese el número de cuenta bancaria.
                         </div>
                       </div>
@@ -244,7 +242,8 @@
                 </div>
 
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveModalBtn">Guardar</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    id="saveModalBtn">Guardar</button>
                 </div>
               </div>
 

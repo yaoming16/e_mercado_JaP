@@ -41,7 +41,7 @@ function redirect(url) {
   window.location.href = url;
 }
 
-// set product id 
+// is used to saves the id of the selected product on local storage
 function setProdID(id) {
   localStorage.setItem("prodID", id);
   window.location = "product-info.html";
@@ -64,8 +64,8 @@ async function setLocalCart() {
       cartToSave.push([prod.id, prod.count])
     }
 
-    changeCartIcon(cartToSave);
     localStorage.setItem("cart", JSON.stringify(cartToSave));
+    changeCartIcon(cartToSave);
 
   }
 }
@@ -74,7 +74,6 @@ async function setLocalCart() {
 function changeCartIcon(array) {
   let amountProd = 0;
   for (let element of array) {
-    console.log(array)
     amountProd += element[1];
   }
   cart_Icon.setAttribute("value", amountProd);
@@ -103,32 +102,44 @@ function saveUserData(info) {
   localStorage.setItem('userData', JSON.stringify(userData));
 }
 
-//function to delete local storage data
+//function to delete user information from local storage
 function deleteLSData() {
   localStorage.removeItem('userData');
   localStorage.removeItem('cart');
   localStorage.removeItem('userImg');
 }
 
-
+// this will run only if the user is not on the login page
 if (!document.URL.includes("login.html")) {
 
   // Show  User email when page is loaded on the navbar
   if (localStorage.getItem('userData')) {
-    window.addEventListener("load", function () {
+    window.addEventListener("load", async function () {
       let email_location = document.getElementById("user-email");
       email_location.innerHTML = JSON.parse(localStorage.getItem('userData')).email;
-
+      await setLocalCart();
+      changeCartIcon(JSON.parse(localStorage.getItem("cart")));
     })
-
-    setLocalCart();
-    changeCartIcon(JSON.parse(localStorage.getItem("cart")));
 
   } else {
     redirect("login.html");
   }
 
 }
+
+//Function to show an alert 
+function showAlert(whereToAdd, textToAdd, typeOfAlert) {
+  whereToAdd.innerHTML = `
+  <div class="alert alert-${typeOfAlert} d-flex align-items-center d-flex justify-content-between" role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+    <div>
+      ${textToAdd}
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  `
+}
+
 
 
 //Function to add and remove, after the animation ended, an animation class.
@@ -150,8 +161,3 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
 
     node.addEventListener('animationend', handleAnimationEnd, { once: true });
   });
-
-
-
-
-

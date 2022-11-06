@@ -23,6 +23,7 @@ submit.addEventListener("click", function () {
     redirect("index.html");
 
   }
+  //if the required information is not compleated the user will get feedback with text, the input border color and an animation. 
   if (!email.checkValidity()) {
     email.classList.add('alert-input');
     animateCSS('#alert1', 'shakeX');
@@ -32,7 +33,7 @@ submit.addEventListener("click", function () {
     alert_p[0].classList.add('d-none');
   }
 
-  if (!password.value.trim() !== "") {
+  if (password.value.trim() === "") {
     password.classList.add('alert-input');
     animateCSS('#alert2', 'shakeX');
     alert_p[1].classList.remove('d-none');

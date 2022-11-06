@@ -12,7 +12,7 @@ const clearFilterBtn = document.getElementById("clearRangeFilter");
 let listAfterSearch = {};
 let currentList = {};
 let productInfo = {};
-//  listToUse se va a usar para que dependiendo del valor que tenga al moento de aplicar un filtro, seleccionar el array que se va  a filtrar. 
+//  listToUse will be used when a filter is applied to the products on the page to know to wich array we need to apply the filter. 
 let listToUse = 0;
 
 
@@ -29,23 +29,19 @@ function subTitle(category) {
 }
 
 // function to add the products information to the page 
-function addProduct(jsonData) {
+function addProduct(prodData) {
   let content_to_append = "";
-  let products = jsonData.products;
+  let products = prodData.products;
 
   for (let i = 0; i < products.length; i++) {
     content_to_append += `
-    <div class="product-div  list-group-item-action cursor-active" onclick="setProdID(`+ products[i].id + `)">
-        
+    <div class="product-div  list-group-item-action cursor-active" onclick="setProdID(`+ products[i].id + `)"> 
       <img class="product-img" src=` + products[i].image + `>
-
       <div class="product-name-div">
         <h3 class="product-title">` + products[i].name + " - " + products[i].currency + " " + products[i].cost + `</h3>
         <p class="product-description">`+ products[i].description + `<p>
       </div>
-
       <p class="sold-amount">`+ products[i].soldCount + ` Vendidos</p>
-
     </div>
     `
   }
@@ -53,8 +49,7 @@ function addProduct(jsonData) {
   container.innerHTML = content_to_append;
 };
 
-
-// event to show the products on the page when the dom is loaded 
+// event to add the products to the page when the dom is loaded
 document.addEventListener("DOMContentLoaded", async function () {
   let productData = await jsonData(prod_url);
   if (productData.status === "ok") {

@@ -1,6 +1,14 @@
 const prodTable = document.querySelector("#prod-table");
 const cost_div_items = document.querySelectorAll(".cost-div-item");
 const shipping = document.getElementsByName("shipping");
+const form1 = document.querySelector('#form1');
+const form2 = document.querySelector('#form2');
+const pay_method_span = document.querySelector("#pay-method-span");
+const alert_div = document.querySelector('#alert-div');
+const TBancaria = document.querySelector("#TBancaria");
+const tarjeta = document.querySelector("#tarjeta");
+const credit_card_input = document.querySelectorAll(".credit-card");
+const numCuenta_input = document.querySelector("#numCuenta");
 
 
 //Function to add the products in the cart
@@ -51,10 +59,8 @@ function addCartProducts(array) {
   prodTable.innerHTML = contentToAppend;
 }
 
-// function to change subtotal
+// function to change subtotal when the amount of each product on the cart is changed 
 function subtotalCalculator(prodNum, quantity, cost) {
-
-  // input value is a string so i need to use parseInt to get an integer as a result of the function 
   quantity = parseInt(quantity);
   let subTotal_td = document.querySelector(`#subTotal-${prodNum}`);
   let newSubTotal = quantity * cost;
@@ -70,8 +76,7 @@ function subtotalCalculator(prodNum, quantity, cost) {
 
 
 
-//close BTN 
-
+// Function to delete an items from the cart 
 function deleteFromCart(index) {
   localCart.splice(index, 1);
   cartToAdd.splice(index, 1);
@@ -88,6 +93,12 @@ let localCart = JSON.parse(localStorage.getItem("cart"));
 
 document.addEventListener("DOMContentLoaded", async () => {
 
+  // this is to check if the user have just compleated a purchase and was redirected, in wich case will get an alert.
+  if (localStorage.getItem('wasRedirected') === 'yes') {
+    showAlert(alert_div, 'Compra realizada con éxito', 'success');
+    localStorage.setItem('wasRedirected', 'no')
+  }
+
   //get items saved in the local Storage
 
   for (let prodarr of localCart) {
@@ -103,7 +114,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       id: prod.id,
       name: prod.name,
       count: prodarr[1],
-      unitCost: prod.currency === 'USD' ? prod.cost : Math.round(prod.cost / 40), 
+      unitCost: prod.currency === 'USD' ? prod.cost : Math.round(prod.cost / 40),
       currency: 'USD',
       image: prod.images[0]
 
@@ -122,11 +133,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 })
 
 
-// Total calculation 
+// Function to calculated the total cost of the purchase
 
 function costSubtotal() {
 
-  // subtotal part
+  // subtotal part, is obtained from the sum of each product subtotal
   let totalSub = 0;
   let prodSubtotals = document.getElementsByClassName('prod-total-span');
 
@@ -137,7 +148,7 @@ function costSubtotal() {
 
   cost_div_items[0].innerHTML = totalSub;
 
-  //shipment
+  //shipment = shipment% x subtotal 
 
   let shipmentValue = 0;
   for (let element of shipping) {
@@ -146,17 +157,15 @@ function costSubtotal() {
     }
   }
   cost_div_items[1].innerHTML = roundTwoDecimals(shipmentValue);
+
+  //total = shipment + subtotal
   cost_div_items[2].innerHTML = roundTwoDecimals(shipmentValue + totalSub);
 }
 
 
-// Form controls
+// Form validation
 
-const TBancaria = document.querySelector("#TBancaria");
-const tarjeta = document.querySelector("#tarjeta");
-const credit_card_input = document.querySelectorAll(".credit-card");
-const numCuenta_input = document.querySelector("#numCuenta");
-
+// event to disable the paying method that wasn`t selected
 TBancaria.addEventListener("click", () => {
 
   numCuenta_input.disabled = false;
@@ -169,6 +178,7 @@ TBancaria.addEventListener("click", () => {
   pay_method_span.classList.remove("text-danger");
 })
 
+// event to disable the paying method that wasn`t selected
 tarjeta.addEventListener("click", () => {
   for (let input of credit_card_input) {
     input.disabled = false;
@@ -180,15 +190,7 @@ tarjeta.addEventListener("click", () => {
   pay_method_span.classList.remove("text-danger");
 })
 
-
-// form validation 
-
-const form1 = document.querySelector('#form1');
-const form2 = document.querySelector('#form2');
-const pay_method_span = document.querySelector("#pay-method-span");
-const alert_div = document.querySelector('#alert-div');
-
-
+// this is to chech if the user has compleated the information required to compleate the purchase. The user will get feedeback 
 document.getElementById('buyBtn').addEventListener('click', () => {
   if (!form1.checkValidity()) {
     form1.classList.add('was-validated');
@@ -197,25 +199,26 @@ document.getElementById('buyBtn').addEventListener('click', () => {
     form2.classList.add('was-validated');
     pay_method_span.classList.add("text-danger");
     document.getElementById("saveModalBtn").addEventListener('click', () => {
-      if(form2.checkValidity()) {
+      if (form2.checkValidity()) {
         pay_method_span.classList.remove("text-danger");
       } else {
-        pay_method_span.classList.add("text-danger");  
+        pay_method_span.classList.add("text-danger");
       }
     })
   }
-  if (form1.checkValidity() && form2.checkValidity()) {
-    alert_div.innerHTML = `
-    <div class="alert alert-success d-flex align-items-center d-flex justify-content-between" role="alert">
-      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-      <div>
-        Compra realizada con éxito
-      </div>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    `
+  // if the cart is empty the user can't compleate the purchase and will get an alert
+  if (localCart.length === 0) {
+    showAlert(alert_div, 'Debe agregar productos al carrito antes de poder realizar la compra', 'danger')
+  }
+
+  // if the purchase is compleated we delete the cart and reload the page. We set wasRedirected on the LS to yes so the user gets an alert when the page reloads
+  if (form1.checkValidity() && form2.checkValidity() && localCart.length !== 0) {
+    localStorage.setItem('cart', JSON.stringify([]));
+    localStorage.setItem('wasRedirected', 'yes');
+    redirect('cart.html')
   }
 })
+
 
 
 
