@@ -81,13 +81,13 @@ window.onload = function () {
 
   google.accounts.id.renderButton(
     document.getElementById("google-button"),
-    { theme: "filled_blue"}  // customization attributes
+    { theme: "filled_blue", size: "medium"}  // customization attributes
   );
   // also display the One Tap dialog on right side
   // important for auto login
   google.accounts.id.prompt();
 }
-document.getElementsByTagName('iframe')[0].classList = '';
+
 
 
 // function to decode the response.credential
