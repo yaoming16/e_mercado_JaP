@@ -43,5 +43,5 @@ h1 {
 }
 
 #google-button > div:first-of-type {
-    width: 100%;
+    width: 100% !important;
 }
